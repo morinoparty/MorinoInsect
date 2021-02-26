@@ -1,0 +1,4 @@
+name: MorinoInsect
+version: 1.0
+main: com.github.morinoparty.morinoinsect.MorinoInsect
+api-version: 1.16
