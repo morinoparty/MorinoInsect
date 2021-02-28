@@ -21,7 +21,7 @@ class CatchInsectsEvent : Listener {
         // TODO: 虫取り網の作成(現在はFISHING_RODになっている)
         val playerHasNet      = itemInPlayerHand == Material.FISHING_ROD
         val playerHasCoolTime = playerInCoolTime.contains(player)
-        // クールタイムは１０秒
+        // TODO: クールタイムの秒数を決める
         val coolTime          = 1000 * 10
         if (!playerHasNet || playerHasCoolTime) return
         setCoolTime(player, coolTime)
