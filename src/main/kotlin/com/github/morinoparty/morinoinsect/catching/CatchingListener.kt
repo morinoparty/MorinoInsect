@@ -12,10 +12,13 @@ class CatchInsectsEvent : Listener {
 
     private val playerInCoolTime : MutableList<Player> = ArrayList()
 
+    // 虫取りイベントを発生させる
+    // 虫取り網のクリックイベントをListenする
     @EventHandler
     fun onCatch(event : PlayerInteractEvent) {
         val player            = event.player
         val itemInPlayerHand  = player.inventory.itemInMainHand.type
+        // TODO: 虫取り網の作成(現在はFISHING_RODになっている)
         val playerHasNet      = itemInPlayerHand == Material.FISHING_ROD
         val playerHasCoolTime = playerInCoolTime.contains(player)
         // クールタイムは１０秒
