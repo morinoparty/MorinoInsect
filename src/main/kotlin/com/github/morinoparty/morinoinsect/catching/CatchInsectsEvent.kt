@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.events
+package com.github.morinoparty.morinoinsect.catching
 
 import org.bukkit.Material
 import org.bukkit.entity.Player
