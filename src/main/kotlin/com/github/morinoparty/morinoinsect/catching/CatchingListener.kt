@@ -15,7 +15,7 @@ class CatchInsectsEvent : Listener {
     // 虫取りイベントを発生させる
     // 虫取り網のクリックイベントをListenする
     @EventHandler
-    fun onCatch(event : PlayerInteractEvent) {
+    fun onCatchInsect(event : PlayerInteractEvent) {
         val player            = event.player
         val itemInPlayerHand  = player.inventory.itemInMainHand.type
         // TODO: 虫取り網の作成(現在はFISHING_RODになっている)
