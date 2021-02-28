@@ -1,26 +1,47 @@
-# MoripaInsect
+## 参考
 
-もりぱむしとりプラグイン
+MoreFishが構造的にわかりやすいので、全体的に参考にする
 
-## 概要
+[woodyn1002/more-fish](https://github.com/woodyn1002/more-fish)
 
-Minecraft でゴージャスな虫取り 🐞 を実装するプラグインです。
+*.../morinoinsect/*
 
-エキサイティングな虫取り体験をプレイヤーに提供します。
+📂**command/**
 
-## 設計
+//コマンドを作成するフォルダ
 
-プロジェクトに使用されている Notion に全てまとめています。
+📄**MainCommand.kt**
 
-[https://www.notion.so/morinoparty2/fb9d640102814e4bb1c10f7ec1e8f844](https://www.notion.so/morinoparty2/fb9d640102814e4bb1c10f7ec1e8f844)
+全てのコマンドをここで定義する
 
-## ディスカッション
+[woodyn1002/more-fish](https://github.com/woodyn1002/more-fish/blob/master/src/main/kotlin/me/elsiff/morefish/command/MainCommand.kt)
 
-もりのパーティ公式 Discord サーバーにて会話を行っています。
-ぜひご参加ください。
+📂**announcement/**
 
-[https://discord.gg/9HdanPM](https://discord.gg/9HdanPM)
+//アナウンスを実行する際のクラスを格納するフォルダ
 
-## 提供元
+📄**ServerAnnouncement.kt**
 
-もりのパーティ [https://morino.party](https://morino.party/)
+//サーバー全体にアナウンスする際のクラス
+
+[https://github.com/woodyn1002/more-fish/blob/master/src/main/kotlin/me/elsiff/morefish/announcement/ServerAnnouncement.kt](https://github.com/woodyn1002/more-fish/blob/master/src/main/kotlin/me/elsiff/morefish/announcement/ServerAnnouncement.kt)
+
+📄**PlayerAnnouncement.kt**
+
+//特定のプレイヤーにアナウンスする際のクラス
+
+[https://github.com/woodyn1002/more-fish/blob/master/src/main/kotlin/me/elsiff/morefish/announcement/PlayerAnnouncement.kt](https://github.com/woodyn1002/more-fish/blob/master/src/main/kotlin/me/elsiff/morefish/announcement/PlayerAnnouncement.kt)
+
+📂**catching/**
+
+// 虫取り
+
+📂**hooker/**
+
+//プラグイン連携
+
+📂**util/**
+
+//ユーティリティ関係
+
+**📄MorinoInsect.kt**
