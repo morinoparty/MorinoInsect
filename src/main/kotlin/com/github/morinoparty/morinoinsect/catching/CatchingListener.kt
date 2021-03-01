@@ -1,6 +1,7 @@
 package com.github.morinoparty.morinoinsect.catching
 
 import com.github.morinoparty.morinoinsect.MorinoInsect
+import com.github.morinoparty.morinoinsect.util.Net
 import com.okkero.skedule.schedule
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -10,7 +11,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import java.util.ArrayList
 
-class CatchInsectsEvent(val plugin : MorinoInsect) : Listener {
+class CatchInsectsEvent(private val plugin : MorinoInsect) : Listener {
 
     private val playerInCoolTime : MutableList<Player> = ArrayList()
 
@@ -19,12 +20,12 @@ class CatchInsectsEvent(val plugin : MorinoInsect) : Listener {
     @EventHandler
     fun onCatchInsect(event : PlayerInteractEvent) {
         val player            = event.player
-        val itemInPlayerHand  = player.inventory.itemInMainHand.type
+        val itemInPlayerHand  = player.inventory.itemInMainHand
         // TODO: 虫取り網の作成(現在はFISHING_RODになっている)
-        val playerHasNet      = itemInPlayerHand == Material.FISHING_ROD
+        val playerHasNet      = itemInPlayerHand.equals(Net.createNetInstance())
         val playerHasCoolTime = playerInCoolTime.contains(player)
-        // TODO: クールタイムの秒数を決める
-        val coolTime : Long   = 200
+        // クールタイムは３０秒
+        val coolTime : Long   = 20 * 30
         if (!playerHasNet || playerHasCoolTime) return
         setCoolTime(player, coolTime)
     }
@@ -33,8 +34,7 @@ class CatchInsectsEvent(val plugin : MorinoInsect) : Listener {
         playerInCoolTime.add(player)
         // 遅延処理　(coolTime秒待つ)
         val scheduler = Bukkit.getScheduler()
-        scheduler.schedule(plugin)
-        {
+        scheduler.schedule(plugin) {
             waitFor(coolTime)
             playerInCoolTime.remove(player)
         }
