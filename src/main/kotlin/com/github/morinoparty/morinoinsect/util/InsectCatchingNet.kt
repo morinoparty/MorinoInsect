@@ -3,7 +3,7 @@ package com.github.morinoparty.morinoinsect.util
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-class Net {
+class InsectCatchingNet {
 
     // javaのstatic関数を再現
     companion object {
