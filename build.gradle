@@ -1,13 +1,27 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:7.1.0"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.31'
     id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
 group = 'com.github.morinoparty'
 version = '1.0-SNAPSHOT'
 
 repositories {
+    jcenter()
     mavenCentral()
     maven { url 'https://papermc.io/repo/repository/maven-public/' }
     maven { url 'https://oss.sonatype.org/content/groups/public/' }
@@ -16,13 +30,17 @@ repositories {
     maven { url 'https://repo.minebench.de/' }
 }
 
+configurations {
+    ktlint
+}
+
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     compile "co.aikar:acf-paper:0.5.0-SNAPSHOT"
     implementation "com.okkero.skedule:skedule:1.2.6"
     implementation "de.themoep:minedown-adventure:1.7.0-SNAPSHOT"
-
+    ktlint "com.github.shyiko:ktlint:0.30.0"
 }
 
 shadowJar {
