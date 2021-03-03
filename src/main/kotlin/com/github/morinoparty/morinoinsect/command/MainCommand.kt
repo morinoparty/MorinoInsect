@@ -10,7 +10,7 @@ import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 
 @CommandAlias("morinoinsect|mi|insect")
-class MainCommand(val plugin: MorinoInsect): BaseCommand() {
+class MainCommand(val plugin: MorinoInsect) : BaseCommand() {
 
     val pluginName = "MorinoInsect"
     val prefix = "${ChatColor.AQUA}[$pluginName]${ChatColor.RESET} "
@@ -18,8 +18,7 @@ class MainCommand(val plugin: MorinoInsect): BaseCommand() {
     @Default
     @Subcommand("help")
     @CommandPermission("moripa.help")
-    fun help (sender: CommandSender) {
+    fun help(sender: CommandSender) {
         sender.sendMessage("$prefix ${ChatColor.DARK_AQUA}> =====${ChatColor.AQUA}${ChatColor.BOLD}$pluginName ${ChatColor.DARK_AQUA} ===== <")
     }
-
 }
