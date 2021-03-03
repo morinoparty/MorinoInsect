@@ -1,7 +1,8 @@
 package com.github.morinoparty.morinoinsect.catching
 
+import com.github.morinoparty.morinoinsect.insectsList.SampleInsect
 import com.github.morinoparty.morinoinsect.util.Vector
-import com.google.common.collect.ImmutableList
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
@@ -23,6 +24,9 @@ class SpawningInsectsListener : Listener {
             WalkCount[player] = walkCount
             // ３０ブロック歩いたら周りに虫をスポーンさせる
             if (walkCount < 30) return
+            val blocksAroundPlayer = detectBlocksAroundPlayer(player)
+            val blockSelectedRandomly = chooseSpawnBlock(blocksAroundPlayer)
+            spawnInsects(blockSelectedRandomly.location)
         }
     }
 
@@ -59,11 +63,15 @@ class SpawningInsectsListener : Listener {
             block.equals(Material.JUNGLE_LEAVES)
     }
 
-    private fun spawnInsects(player: Player, blocks: ImmutableList<Block>) {
-        val maxBlocksCountInBlocksList = 108
+    private fun spawnInsects(location: Location) {
+        val sampleInsect = SampleInsect()
+        sampleInsect.spawn(location)
+    }
+
+    private fun chooseSpawnBlock(blocks: MutableList<Block>): Block {
+        val maxBlocksCountInBlocksList = blocks.count()
         val randomIndex = Random.nextInt(until = maxBlocksCountInBlocksList)
         val blockFromRandomIndex = blocks[randomIndex]
-        val blockLocation = blockFromRandomIndex.location
-        // ToDo: この続きに虫をスポーンさせる処理を書く
+        return blockFromRandomIndex
     }
 }
