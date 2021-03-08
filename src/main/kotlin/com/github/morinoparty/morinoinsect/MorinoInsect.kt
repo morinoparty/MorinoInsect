@@ -1,20 +1,20 @@
 package com.github.morinoparty.morinoinsect
 
+import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import co.aikar.commands.PaperCommandManager
 import com.github.morinoparty.morinoinsect.command.MainCommand
-import org.bukkit.plugin.java.JavaPlugin
 
-class MorinoInsect : JavaPlugin() {
+class MorinoInsect : KotlinPlugin() {
     val morinoInsect = this
 
-    override fun onEnable() {
+    override fun onPluginEnable() {
         // Plugin startup logic
         val manager = PaperCommandManager(this)
         val mainCommand = MainCommand(this)
         manager.registerCommand(mainCommand)
     }
 
-    override fun onDisable() {
+    override fun onPluginDisable() {
         // Plugin shutdown logic
     }
 }
