@@ -78,4 +78,4 @@ tasks {
 
 configurations.all {
     resolutionStrategy.cacheChangingModulesFor(120, "seconds")
-}f
+}
