@@ -90,8 +90,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
         for (x in 0..detectingBlocksArea.x step 1) {
             for (z in 0..detectingBlocksArea.z step 1) {
                 for (y in 0..detectingBlocksArea.y step 1) {
-                    val detectedArea = playerLocation
-                        .add(x.toDouble(), y.toDouble(), z.toDouble())
+                    val detectedArea = playerLocation.add(x.toDouble(), y.toDouble(), z.toDouble())
                     val detectedBlock = detectedArea.block
                     chooseAppropriateBlock(detectedBlock)
                 }

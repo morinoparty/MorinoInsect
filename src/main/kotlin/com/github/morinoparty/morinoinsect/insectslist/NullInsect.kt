@@ -4,7 +4,7 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 // insectクラスをInsectsManagerから取得する時にnullを出したくないので代わりにNullInsectというinsectクラスを作った
-class NullInsect : IInsectBase {
+class NullInsect : InsectBase {
 
     override val reality = InsectTier.NORMAL
     override val displayName = "NullInsect"
