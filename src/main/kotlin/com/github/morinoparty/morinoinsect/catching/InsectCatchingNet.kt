@@ -8,7 +8,6 @@ class InsectCatchingNet {
 
     // 他のクラスでこのメソッドを仕様するときにクラスの宣言無しで使える ex: InsectCatchingNet.createNetInstance()
     companion object {
-        @JvmStatic
         fun createNetInstance(): ItemStack {
             val insectCatchingNet = ItemStack(Material.FISHING_ROD, 1)
             val itemMeta = insectCatchingNet.itemMeta

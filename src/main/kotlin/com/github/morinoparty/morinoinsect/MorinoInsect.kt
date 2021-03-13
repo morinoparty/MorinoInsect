@@ -20,10 +20,8 @@ class MorinoInsect : KotlinPlugin() {
 
     companion object {
 
-        @JvmStatic
         private lateinit var instance: MorinoInsect
 
-        @JvmStatic
         fun getInstance(): MorinoInsect {
             return instance
         }
