@@ -1,7 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching
 
 import com.github.morinoparty.morinoinsect.MorinoInsect
-import com.github.morinoparty.morinoinsect.util.InsectCatchingNet
 import com.okkero.skedule.schedule
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -20,7 +19,6 @@ class CatchInsectsEvent(private val plugin: MorinoInsect) : Listener {
     fun onCatchInsect(event: PlayerInteractEvent) {
         val player = event.player
         val itemInPlayerHand = player.inventory.itemInMainHand
-        // TODO: 虫取り網の作成(現在はFISHING_RODになっている)
         val playerHasNet = itemInPlayerHand.equals(InsectCatchingNet.createNetInstance())
         val playerHasCoolTime = playerInCoolTime.contains(player)
         // クールタイムは３０秒
