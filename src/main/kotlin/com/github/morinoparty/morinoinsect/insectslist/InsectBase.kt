@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
-interface IInsectBase {
+interface InsectBase {
 
     val reality: InsectTier
     val displayName: String
