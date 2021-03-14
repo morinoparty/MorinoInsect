@@ -3,6 +3,12 @@ package com.github.morinoparty.morinoinsect.extentions
 import kotlin.random.Random
 
 // repeat(2)と、２回繰り返すことが確定しているのは、無造作に取り出す要素はプラグインの仕様上２個までと決まっているからだ
+/**
+ * MutableListの中からランダムに２つの要素を取り出す拡張関数
+ *
+ * @receiver 型指定なしのMutableList
+ * @return ランダムに取り出した要素が入ったMutableList
+ */
 fun <T> MutableList<T>.selectRandomly(): MutableList<T> {
     val selected = mutableListOf<T>()
     val remaining = toMutableList()
@@ -22,6 +28,12 @@ fun <T> MutableList<T>.selectRandomly(): MutableList<T> {
     return selected
 }
 
+/**
+ * MutableListの中からランダムに１つの要素を取り出す拡張関数
+ *
+ * @receiver 型指定なしのMutableList
+ * @return ランダムに取り出した要素が入ったMutableList
+ */
 fun <T> MutableList<T>.selectOneRandomly(): T {
     val list = toMutableList()
     // １個の要素を無造作に選ぶ処理

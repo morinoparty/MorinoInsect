@@ -4,6 +4,11 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 // insectクラスをInsectsManagerから取得する時にnullを出したくないので代わりにNullInsectというinsectクラスを作った
+/**
+ * InsectBase関係の処理でnullを返したいときに使うクラス
+ *
+ * @sample nullInsect
+ */
 class NullInsect : InsectBase {
 
     override val reality = InsectTier.NORMAL
@@ -15,3 +20,6 @@ class NullInsect : InsectBase {
     override val spawnType = SpawnType.ONGROUND
     override val icon = ItemStack(Material.BARRIER)
 }
+
+/** @suppress NullInsectの使い方のサンプルを表示するために定義した */
+private val nullInsect = NullInsect()
