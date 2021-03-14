@@ -22,7 +22,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /** プレイヤーの歩数上限 */
     private val walkCountMax = 30
 
-    /** 虫のスポーンにあった適切なブロックを入れるリスト */
+    /** 虫がスポーン可能な適切なブロックを入れるリスト */
     private val appropriateBlocks: MutableList<Block> = ArrayList()
 
     private val randomlySelectedInsects = insectsManager.selectInsectRandomly()

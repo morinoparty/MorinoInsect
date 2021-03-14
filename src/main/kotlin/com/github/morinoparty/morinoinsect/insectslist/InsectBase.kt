@@ -29,6 +29,7 @@ interface InsectBase {
     /** 虫のサイズの最大値 */
     val lengthMax: Int
 
+    // ToDo: 虫のスポーンブロック指定はmore-fishのconditionとして扱う
     /** 虫がスポーンできるブロック */
     val spawnableBlock: Material
 
@@ -53,19 +54,19 @@ interface InsectBase {
             // 額縁を透明にして壊れないようにする
             val invisible = NamespacedKey(MorinoInsect.getInstance(), "invisible")
             val invulnerable = NamespacedKey(MorinoInsect.getInstance(), "invulnerable")
+            val itemFrameDirection = BlockFace.DOWN
             itemFrame.persistentDataContainer.set(invisible, PersistentDataType.BYTE, 1)
             itemFrame.persistentDataContainer.set(invulnerable, PersistentDataType.BYTE, 1)
-            itemFrame.setItem(icon)
-            val itemFrameDirection = BlockFace.DOWN
             itemFrame.setFacingDirection(itemFrameDirection)
+            itemFrame.setItem(icon)
         } else if (spawnType == SpawnType.ONTREE) {
             val itemFrame = player.world.spawn(spawnBlock.location, ItemFrame::class.java)
             // 額縁を透明にして壊れないようにする
             val invisible = NamespacedKey(MorinoInsect.getInstance(), "invisible")
             val invulnerable = NamespacedKey(MorinoInsect.getInstance(), "invulnerable")
+            val itemFrameDirection = getAppropriateDirection(spawnBlock)
             itemFrame.persistentDataContainer.set(invisible, PersistentDataType.BYTE, 1)
             itemFrame.persistentDataContainer.set(invulnerable, PersistentDataType.BYTE, 1)
-            val itemFrameDirection = getAppropriateDirection(spawnBlock)
             if (itemFrameDirection == null) return
             itemFrame.setFacingDirection(itemFrameDirection)
         }
