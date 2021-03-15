@@ -30,7 +30,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /**
      * プレイヤーが歩くのを感知して、３０歩歩くと周りに虫をスポーンさせる
      *
-     * @param[event] プレイヤーの動きを感知するイベント
+     * @param event プレイヤーの動きを感知するイベント
      */
     @EventHandler
     fun onSpawn(event: PlayerMoveEvent) {
@@ -60,7 +60,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /**
      * 検知されたブロックが空かを確かめる
      *
-     * @param[player] 対象プレイヤー
+     * @param player 対象プレイヤー
      * @return 空ならばfalse、要素が入っていればtrueを返す
      */
     private fun isDetectedBlocksEmpty(player: Player): Boolean {
@@ -78,16 +78,15 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
         appropriateBlocks.clear()
     }
 
-    // ToDo: insect.ymlコンフィグから取得したspawnableBlockを元に検知したいブロックのリストを作成する
     /**
      * ランダムに選ばれた２匹の虫のどちらかに合う適切なブロックをappropriateBlocksリストに入れていく
      *
-     * @param[targetBlock] 対象となるブロック
+     * @param targetBlock 対象となるブロック
      */
     private fun chooseAppropriateBlock(targetBlock: Block) {
         // randomlySelectedInsects配列には２個しか要素が入っていないかつ、入れる場所を指定しているので、下のような処理が可能
-        val condition1 = randomlySelectedInsects[0].spawnableBlock == (targetBlock.type)
-        val condition2 = randomlySelectedInsects[1].spawnableBlock == (targetBlock.type)
+        val condition1 = randomlySelectedInsects[0].spawnableBlock.checkCondition(targetBlock.type)
+        val condition2 = randomlySelectedInsects[1].spawnableBlock.checkCondition(targetBlock.type)
         if (condition1 || condition2) {
             appropriateBlocks.add(targetBlock)
         }
@@ -96,8 +95,8 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /**
      * プレイヤーの歩数をwalkCountマップにセットする
      *
-     * @param[player] 対象のプレイヤー
-     * @param[playerWalkCount] 対象のプレイヤーにセットする歩数
+     * @param player 対象のプレイヤー
+     * @param playerWalkCount 対象のプレイヤーにセットする歩数
      */
     private fun setPlayerWalkCount(player: Player, playerWalkCount: Int?) {
         walkCount[player] = playerWalkCount
@@ -106,7 +105,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /**
      * 指定したプレイヤーの歩数を０にする
      *
-     * @param[player] 対象のプレイヤー
+     * @param player 対象のプレイヤー
      */
     private fun resetPlayerWalkCount(player: Player) {
         walkCount[player] = 0
@@ -115,7 +114,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /**
      * 指定したプレイヤーがwalkCountに入っているか確かめる
      *
-     * @param[player] 対象のプレイヤー
+     * @param player 対象のプレイヤー
      * @return 入っていればtrue,入っていなければfalseを返す
      */
     private fun isPlayerInPlayerWalkCountMap(player: Player): Boolean {
@@ -127,7 +126,7 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     /**
      * プレイヤーの周りのブロックを検知して最終的には適切なブロックはappropriateBlocksリストに入れる
      *
-     * @param[player] 対象のプレイヤー
+     * @param player 対象のプレイヤー
      */
     private fun detectBlocksAroundPlayer(player: Player) {
         // プレイヤーの真下のブロックの位置を取得したいため、y座標を-1した

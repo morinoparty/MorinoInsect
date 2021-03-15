@@ -9,8 +9,12 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import java.util.ArrayList
 
-/** 虫を捕まえた時のイベントの処理をするイベントクラス */
-class CatchInsectsEvent(private val plugin: MorinoInsect) : Listener {
+/**
+ * 虫のスポーン処理をするイベントクラス
+ *
+ * @property plugin
+ */
+class CatchingListener(private val plugin: MorinoInsect) : Listener {
 
     /** クールタイムをかけられたプレイヤーを入れておくリスト */
     private val playerInCoolTime: MutableList<Player> = ArrayList()
@@ -19,7 +23,7 @@ class CatchInsectsEvent(private val plugin: MorinoInsect) : Listener {
      * 虫取りイベントを発生させる
      * 虫取り網のクリックイベントをListenする
      *
-     * @param[event] プレイヤーがアイテムに触れた時に作動するイベント
+     * @param event プレイヤーがアイテムに触れた時に作動するイベント
      */
     @EventHandler
     fun onCatchInsect(event: PlayerInteractEvent) {
@@ -36,8 +40,8 @@ class CatchInsectsEvent(private val plugin: MorinoInsect) : Listener {
     /**
      * プレイヤーにクールタイムを設ける
      *
-     * @param[player] 対象プレイヤー
-     * @param[coolTime] クールタイム
+     * @param player 対象プレイヤー
+     * @param coolTime クールタイム
      */
     private fun setCoolTime(player: Player, coolTime: Long) {
         playerInCoolTime.add(player)
