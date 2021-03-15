@@ -5,10 +5,20 @@ plugins {
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
     id("com.github.johnrengelman.shadow") version "6.0.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    id("org.jetbrains.dokka") version "1.4.20"
 }
 
 group = "com.github.morinoparty"
 version = "1.0-SNAPSHOT"
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.jetbrains.dokka:dokka-gradle-plugin:1.4.20")
+    }
+}
 
 repositories {
     jcenter()
@@ -26,6 +36,8 @@ repositories {
     // Annotation Command Framework
     maven("https://repo.aikar.co/content/groups/aikar/")
 }
+
+apply(plugin = "org.jetbrains.dokka")
 
 dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
@@ -47,6 +59,9 @@ dependencies {
 
     // Annotation Command Framework
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
+
+    implementation(kotlin("stdlib"))
+    testImplementation("junit:junit:4.12")
 }
 
 bukkit {
@@ -73,6 +88,16 @@ tasks {
     }
     build {
         dependsOn(shadowJar)
+    }
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
+
+    dokkaSourceSets {
+        configureEach {
+            includeNonPublic.set(true)
+        }
     }
 }
 
