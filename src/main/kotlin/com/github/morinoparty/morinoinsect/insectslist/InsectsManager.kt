@@ -36,6 +36,7 @@ class InsectsManager {
      * @return 引数の虫IDと保管されている虫IDと一致する虫データ
      */
     fun obtainInsectData(insectId: Int): InsectBase {
+        // InsectBaseの定義にnullが使えないので代わりにNullInsectという代わりのクラスを定義している
         var insect: InsectBase = NullInsect()
         for (insectData in insects) {
             val isInsectDataMatched = insectData.insectId == (insectId)
