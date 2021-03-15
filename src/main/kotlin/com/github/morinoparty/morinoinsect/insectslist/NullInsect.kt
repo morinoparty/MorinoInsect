@@ -1,5 +1,7 @@
 package com.github.morinoparty.morinoinsect.insectslist
 
+import com.github.morinoparty.morinoinsect.condition.SpawnTypeCondition
+import com.github.morinoparty.morinoinsect.condition.SpawnableBlockCondition
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
@@ -16,10 +18,10 @@ class NullInsect : InsectBase {
     override val insectId = 0
     override val lengthMin = 1
     override val lengthMax = 1
-    override val spawnableBlock = Material.BARRIER
-    override val spawnType = SpawnType.ONGROUND
+    override val spawnableBlock = SpawnableBlockCondition(Material.BARRIER)
+    override val spawnType = SpawnTypeCondition(SpawnType.ONGROUND)
     override val icon = ItemStack(Material.BARRIER)
-}
 
-/** @suppress NullInsectの使い方のサンプルを表示するために定義した */
-private val nullInsect = NullInsect()
+    // クラスの使い方のサンプル用に定義した
+    private val nullInsect = NullInsect()
+}
