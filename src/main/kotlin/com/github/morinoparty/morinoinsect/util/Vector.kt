@@ -4,9 +4,9 @@ package com.github.morinoparty.morinoinsect.util
 /**
  * x, y, zの３つの軸を持つvectorクラス
  *
- * @param[x] x軸
- * @param[y] y軸
- * @param[z] z軸
+ * @param x x軸
+ * @param y y軸
+ * @param z z軸
  */
 data class Vector(
     val x: Int,
