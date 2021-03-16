@@ -12,7 +12,7 @@ class InsectsManager {
     /**
      * 新たに虫のデータを登録する
      *
-     * @param[insect] 新たに登録する虫
+     * @param insect 新たに登録する虫
      */
     fun registerInsect(insect: InsectBase) {
         if (insectExists(insect)) return
@@ -22,7 +22,7 @@ class InsectsManager {
     /**
      * 虫がデータに保管されているか確かめる
      *
-     * @param[insect] 対象の虫
+     * @param insect 対象の虫
      * @return 保管されていなければfalse,保管されていればtrue
      */
     fun insectExists(insect: InsectBase): Boolean {
@@ -32,7 +32,7 @@ class InsectsManager {
     /**
      * 引数の虫IDと保管されている虫IDと一致する虫データを取り出す
      *
-     * @param[insectId] 虫ID
+     * @param insectId 虫ID
      * @return 引数の虫IDと保管されている虫IDと一致する虫データ
      */
     fun obtainInsectData(insectId: Int): InsectBase {
@@ -49,7 +49,7 @@ class InsectsManager {
     /**
      * 引数の虫の名前と保管されている虫の名前と一致する虫データを取り出す
      *
-     * @param[insectName] 虫の名前
+     * @param insectName 虫の名前
      * @return 引数の虫の名前と保管されている虫の名前と一致する虫データ
      */
     fun obtainInsectData(insectName: String): InsectBase {
