@@ -6,8 +6,8 @@ interface Condition {
     /**
      * 指定した条件にあっているか確認するメソッド
      *
-     * @param anyValue 条件を確認するにあたって必要な引数
+     * @param targetValue 条件を確認するにあたって必要な引数
      * @return 条件にあっていればtrue,あっていなければfalse
      */
-    fun checkCondition(anyValue: Any): Boolean
+    fun checkCondition(targetValue: Any): Boolean
 }

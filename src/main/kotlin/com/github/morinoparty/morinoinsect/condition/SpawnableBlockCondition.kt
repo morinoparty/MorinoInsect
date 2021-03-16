@@ -14,8 +14,8 @@ class SpawnableBlockCondition(private val block: Material) : Condition {
      *
      * @return スポーン可能なブロックならばtrue,そうじゃなければfalse
      */
-    override fun checkCondition(anyValue: Any): Boolean {
-        val targetBlock = anyValue as Material
+    override fun checkCondition(targetValue: Any): Boolean {
+        val targetBlock = targetValue as Material
         return targetBlock == block
     }
 }
