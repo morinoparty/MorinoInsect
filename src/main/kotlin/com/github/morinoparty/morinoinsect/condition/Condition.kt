@@ -9,5 +9,5 @@ interface Condition {
      * @param targetValue 条件を確認するにあたって必要な引数
      * @return 条件にあっていればtrue,あっていなければfalse
      */
-    fun checkCondition(targetValue: Any): Boolean
+    fun <T> checkCondition(targetValue: T): Boolean
 }

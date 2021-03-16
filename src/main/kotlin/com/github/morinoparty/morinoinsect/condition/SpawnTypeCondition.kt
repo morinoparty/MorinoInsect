@@ -15,7 +15,7 @@ class SpawnTypeCondition(private val spawnType: SpawnType) : Condition {
      * @param anyValue スポーンタイプ
      * @return スポーンタイプが適切なものになっていればtrue,なっていなければfalse
      */
-    override fun checkCondition(targetValue: Any): Boolean {
+    override fun <T> checkCondition(targetValue: T): Boolean {
         val spawnType = targetValue as SpawnType
         return spawnType == this.spawnType
     }
