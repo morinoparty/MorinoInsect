@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack
  */
 class NullInsect : InsectBase {
 
-    override val reality = InsectTier.NORMAL
+    override val reality = InsectTierManager.valueOf("NORMAL")
     override val displayName = "NullInsect"
     override val insectId = 0
     override val lengthMin = 1
