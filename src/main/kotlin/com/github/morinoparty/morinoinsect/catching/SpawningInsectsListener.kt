@@ -4,6 +4,7 @@ import com.github.morinoparty.morinoinsect.MorinoInsect
 import com.github.morinoparty.morinoinsect.extentions.selectRandomly
 import com.github.morinoparty.morinoinsect.insectslist.InsectsManager
 import com.github.morinoparty.morinoinsect.util.Vector
+import com.github.morinoparty.morinoinsect.util.areaChecker
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -36,20 +37,15 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     fun onSpawn(event: PlayerMoveEvent) {
         val player = event.player
         if (!isPlayerInPlayerWalkCountMap(player)) {
-            walkCount[player] = 0
+            setPlayerWalkCount(player, 0)
         } else {
             var playerWalkCount = walkCount[player]?.plus(1)
             setPlayerWalkCount(player, playerWalkCount)
+
             // ３０ブロック歩いたら周りに虫をスポーンさせる
             if (playerWalkCount == null) return
             if (playerWalkCount < walkCountMax) return
-            detectBlocksAroundPlayer(player)
-            if (!isDetectedBlocksEmpty(player)) return
-            // chooseSpawnBlock()で返される配列には２個しか要素が入っていないかつ、入れる場所を指定しているので、下のような処理が可能
-            val randomSpawnBlock1 = chooseSpawnBlock()[0]
-            val randomSpawnBlock2 = chooseSpawnBlock()[1]
-            spawnInsect1(player, randomSpawnBlock1)
-            spawnInsect2(player, randomSpawnBlock2)
+            spawnInsectsAroundPlayer(player)
             resetBlocksLists()
             resetPlayerWalkCount(player)
         }
@@ -131,11 +127,12 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
     private fun detectBlocksAroundPlayer(player: Player) {
         // プレイヤーの真下のブロックの位置を取得したいため、y座標を-1した
         val playerLocation = player.location.subtract(0.0, 1.0, 0.0)
-        val detectingBlocksArea = Vector(6, 3, 6)
+        val detectingBlocksArea = Vector(3, 3, 3)
         // 指定した範囲にあるブロックを検知してListに一つずつ入れていく
         for (x in 0..detectingBlocksArea.x step 1) {
             for (z in 0..detectingBlocksArea.z step 1) {
                 for (y in 0..detectingBlocksArea.y step 1) {
+                    if (areaChecker.isSquareCorner(x, z)) continue;
                     val detectedArea = playerLocation.add(x.toDouble(), y.toDouble(), z.toDouble())
                     val detectedBlock = detectedArea.block
                     chooseAppropriateBlock(detectedBlock)
@@ -174,5 +171,16 @@ class SpawningInsectsListener(private val plugin: MorinoInsect) : Listener {
      */
     private fun chooseSpawnBlock(): MutableList<Block> {
         return appropriateBlocks.selectRandomly()
+    }
+
+    private fun spawnInsectsAroundPlayer(player: Player) {
+        detectBlocksAroundPlayer(player)
+        if (!isDetectedBlocksEmpty(player)) return
+
+        // chooseSpawnBlock()で返される配列には２個しか要素が入っていないかつ、入れる場所を指定しているので、下のような処理が可能
+        val randomSpawnBlock1 = chooseSpawnBlock()[0]
+        val randomSpawnBlock2 = chooseSpawnBlock()[1]
+        spawnInsect1(player, randomSpawnBlock1)
+        spawnInsect2(player, randomSpawnBlock2)
     }
 }
