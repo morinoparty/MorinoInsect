@@ -52,8 +52,8 @@ dependencies {
 }
 
 bukkit {
-    main = "com.github.morinoparty.MorinoInsect"
-    depend = listOf("KotlinBukkitAPI", "Vault", "LuckPerms")
+    main = "com.github.morinoparty.morinoinsect.MorinoInsect"
+    depend = listOf("KotlinBukkitAPI", "Vault")
     description = "Minecraft でゴージャスな虫取りを実装するプラグインです。"
     author = "morinoparty"
     website = "https://github.com/morinoparty/MorinoInsect"
