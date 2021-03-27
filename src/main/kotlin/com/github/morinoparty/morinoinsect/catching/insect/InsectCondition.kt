@@ -1,6 +1,10 @@
 package com.github.morinoparty.morinoinsect.catching.insect
 
+import com.github.morinoparty.morinoinsect.catching.condition.BlockCondition
+import com.github.morinoparty.morinoinsect.catching.condition.Condition
+import com.github.morinoparty.morinoinsect.catching.condition.TimeCondition
 import kotlinx.serialization.Serializable
+import org.bukkit.Material
 
 /**
  * 虫のコンディションデータクラス
@@ -16,4 +20,14 @@ data class InsectCondition(
     val blocks: List<String> = emptyList(),
     val direction: String = "",
     val time: String? = null
-)
+) {
+    /**
+     * @return 発生条件を全てまとめてセットで返します
+     */
+    fun generateConditionSet(): Set<Condition> {
+        return setOfNotNull(
+            BlockCondition(blocks.map { Material.valueOf(it.toUpperCase()) }),
+            TimeCondition(time?.replace("day", "true")?.replace("night", "false").toBoolean())
+        )
+    }
+}
