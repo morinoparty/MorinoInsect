@@ -7,6 +7,7 @@ import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.command.MainCommand
 import com.github.morinoparty.morinoinsect.configuration.Message
 import com.github.morinoparty.morinoinsect.configuration.Standard
+import org.bukkit.Material
 import java.nio.file.Paths
 
 class MorinoInsect : KotlinPlugin() {
@@ -19,9 +20,13 @@ class MorinoInsect : KotlinPlugin() {
         applyConfig(this)
 
         val manager = PaperCommandManager(this)
+        val completions = manager.commandCompletions
         val mainCommand = MainCommand(this)
         manager.registerCommand(mainCommand)
-        manager.commandCompletions.registerAsyncCompletion("insect") { insectTypeTable.insectMap.values.map { it.name } }
+        completions.registerAsyncCompletion("insects") { insectTypeTable.insectMap.values.map { it.name } }
+        completions.registerAsyncCompletion("blocks") {
+            Material.values().filter { it.isSolid }.map { block -> block.toString().toLowerCase() }
+        }
     }
 
     override fun onPluginDisable() {
