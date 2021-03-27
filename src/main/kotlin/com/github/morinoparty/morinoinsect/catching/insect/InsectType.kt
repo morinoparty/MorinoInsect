@@ -40,4 +40,14 @@ data class InsectType(
         val comment: List<String>? = null,
         val enchantments: List<String>? = null
     )
+
+    /**
+     * 虫のサイズを決めるメソッド
+     * @return 虫の種類とサイズを含めたInsectを返します
+     */
+    fun generateInsect(): Insect {
+        check(lengthMin <= lengthMax) { "最小サイズと最大サイズが逆になってませんか" }
+        val range = (lengthMin..lengthMax)
+        return Insect(this, (range).random() + (range).random() + (range).random() / 3)
+    }
 }
