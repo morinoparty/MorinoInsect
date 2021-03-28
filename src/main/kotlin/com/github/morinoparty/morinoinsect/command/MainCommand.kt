@@ -37,7 +37,7 @@ class MainCommand(val plugin: MorinoInsect) : BaseCommand() {
     @CommandCompletion("@players @insects <length>")
     fun give(sender: CommandSender, player: OnlinePlayer, insectName: String, length: Int) {
         if (sender !is Player) return
-        
+
         val insect = plugin.insectTypeTable.insectMap.values.find { it.name == insectName }?.generateInsect()
             ?: return sender.sendMessage("その名前の虫は存在しません")
         val receiver = player.getPlayer()
