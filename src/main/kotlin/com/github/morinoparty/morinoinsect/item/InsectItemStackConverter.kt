@@ -60,7 +60,7 @@ class InsectItemStackConverter(
     fun createItemStack(catcher: Player, insect: Insect): ItemStack {
         val insectType = insect.type
         val material = Material.matchMaterial(insectType.icon.id)
-            ?: throw IllegalStateException("'${insectType.icon.id}' というアイテムは存在しません")
+            ?: throw IllegalStateException("${insectType.icon.id} というアイテムは存在しません")
         val itemStack = ItemStack(material, 1)
 
         itemStack.edit<ItemMeta> {
