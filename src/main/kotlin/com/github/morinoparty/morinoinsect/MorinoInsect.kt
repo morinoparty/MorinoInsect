@@ -18,10 +18,10 @@ class MorinoInsect : KotlinPlugin() {
 
         applyConfig(this)
 
-        // Plugin startup logic
         val manager = PaperCommandManager(this)
         val mainCommand = MainCommand(this)
         manager.registerCommand(mainCommand)
+        manager.commandCompletions.registerAsyncCompletion("insect") { insectTypeTable.insectMap.values.map { it.name } }
     }
 
     override fun onPluginDisable() {
