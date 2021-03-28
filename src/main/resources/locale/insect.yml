@@ -1,0 +1,55 @@
+#この設定ファイルは未完成のサンプルです
+
+itemFormat:
+  description:
+    - "&7とった: &b%player%"
+    - "&7さいず: &f%length% mm"
+    - "&7ひづけ: &f%localtime_timezone_Asia/Tokyo,yyyy/MM/dd%"
+rarityMap:
+  common:
+    name: "コモン"
+    color: "#0099ff"
+    chance: 70.0
+    catchAnnounce: -1
+  rare:
+    name: "レア"
+    color: "#FF0000"
+    chance: 22.0
+    catchAnnounce: 1
+insectMap:
+  Beetle:
+    rarity: "common"
+    name: "カブトムシ"
+    lengthMin: 30
+    lengthMax: 90
+    conditions:
+      blocks:
+        - "sand"
+        - "stone"
+      direction: "ONTREE"
+      time: "night"
+    icon:
+      id: "paper"
+      customModelData: 13
+      skullTexture: null
+      comment:
+        - "カブトムシ！"
+        - "おいしい！"
+      enchantments:
+        - "silk_touch|1"
+        - "respiration|2"
+  Hornworm:
+    rarity: "rare"
+    name: "いもむし"
+    lengthMin: 10
+    lengthMax: 20
+    conditions:
+      blocks:
+        - "stone"
+      direction: "ONGROUND"
+    icon:
+      id: "stone_sword"
+      customModelData: 2
+      enchantments:
+        - "mending|1"
+        

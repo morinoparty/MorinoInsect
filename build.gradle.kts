@@ -26,8 +26,9 @@ repositories {
     maven("https://jitpack.io")
     maven("http://repo.dmulloy2.net/nexus/repository/public/")
 
-    // Annotation Command Framework
+    // Utils
     maven("https://repo.aikar.co/content/groups/aikar/")
+    maven("https://repo.minebench.de/")
 }
 
 dependencies {
@@ -45,13 +46,14 @@ dependencies {
     val transitive = Action<ExternalModuleDependency> { isTransitive = false }
     compileOnly("com.github.MilkBowl:VaultAPI:1.7", transitive)
 
-    // Annotation Command Framework
+    // Utils
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
+    implementation("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
 }
 
 bukkit {
-    main = "com.github.morinoparty.MorinoInsect"
-    depend = listOf("KotlinBukkitAPI", "Vault", "LuckPerms")
+    main = "com.github.morinoparty.morinoinsect.MorinoInsect"
+    depend = listOf("KotlinBukkitAPI", "Vault")
     description = "Minecraft でゴージャスな虫取りを実装するプラグインです。"
     author = "morinoparty"
     website = "https://github.com/morinoparty/MorinoInsect"
