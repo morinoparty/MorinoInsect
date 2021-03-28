@@ -34,7 +34,7 @@ data class InsectTypeTable(
         val types = insectMap.values.filter {
             it.rarity == pickRandomRarity().first && it.conditions.generateConditionSet()
                 .all { condition -> condition.check(catcher, block) }
-            }
+        }
         if (types.isEmpty()) return null
         return types.random()
     }
