@@ -10,7 +10,6 @@ class BlockCondition(
         catcher: Player,
         block: Material
     ): Boolean {
-        return true
-        TODO("Not yet implemented")
+        return block in blocks
     }
 }
