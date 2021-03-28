@@ -44,6 +44,7 @@ class MainCommand(val plugin: MorinoInsect) : BaseCommand() {
         val insectItem = converter.createItemStack(receiver, insect)
 
         receiver.inventory.addItem(insectItem)
+    }
 
     /**
      * 条件となるブロックを引数にしてランダムに虫をゲットできるデバッグ用コマンド
