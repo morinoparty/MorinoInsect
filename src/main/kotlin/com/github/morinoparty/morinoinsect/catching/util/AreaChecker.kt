@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.util
+package com.github.morinoparty.morinoinsect.catching.util
 
 class areaChecker {
 
