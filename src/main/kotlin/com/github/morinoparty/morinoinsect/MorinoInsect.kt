@@ -1,59 +1,45 @@
 package com.github.morinoparty.morinoinsect
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
+import br.com.devsrsouza.kotlinbukkitapi.serialization.architecture.config
 import co.aikar.commands.PaperCommandManager
-import com.github.morinoparty.morinoinsect.catching.CatchingListener
-import com.github.morinoparty.morinoinsect.catching.SpawningInsectsListener
+import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.command.MainCommand
+import com.github.morinoparty.morinoinsect.configuration.Message
+import com.github.morinoparty.morinoinsect.configuration.Standard
+import org.bukkit.Material
+import java.nio.file.Paths
 
-/** プロジェクトのメインクラス */
 class MorinoInsect : KotlinPlugin() {
+    lateinit var standard: Standard
+    lateinit var insectTypeTable: InsectTypeTable
+    lateinit var message: Message
 
-    /**
-     * プラグイン起動時の処理を書くメソッド
-     * ここでは他クラスに渡す用のインスタンスの初期化とコマンド、イベントの登録を行っている
-     */
     override fun onPluginEnable() {
-        // Plugin startup logic
-        instance = this
-        registerCommands()
-        registerEvents()
+
+        applyConfig(this)
+
+        val manager = PaperCommandManager(this)
+        val completions = manager.commandCompletions
+        val mainCommand = MainCommand(this)
+        manager.registerCommand(mainCommand)
+        completions.registerAsyncCompletion("insects") { insectTypeTable.insectMap.values.map { it.name } }
+        completions.registerAsyncCompletion("blocks") {
+            Material.values().filter { it.isSolid }.map { block -> block.toString().toLowerCase() }
+        }
     }
 
-    /**
-     * プラグインシャットダウン時の処理を書くメソッド
-     * 特に書くことは無い
-     */
     override fun onPluginDisable() {
         // Plugin shutdown logic
     }
 
-    companion object {
-
-        /** 他クラスに渡す用のインスタンス */
-        private lateinit var instance: MorinoInsect
-
-        /**
-         * 他クラスにこのメインクラスのインスタンスを渡すメソッド
-         *
-         * @return このメインクラスのインスタンス
-         */
-        fun getInstance(): MorinoInsect {
-            return instance
-        }
-    }
-
-    /** イベントを登録するメソッド */
-    private fun registerEvents() {
-        val listenerManager = this.server.pluginManager
-        listenerManager.registerEvents(CatchingListener(this), this)
-        listenerManager.registerEvents(SpawningInsectsListener(this), this)
-    }
-
-    /** コマンドを登録するメソッド */
-    private fun registerCommands() {
-        val commandManager = PaperCommandManager(this)
-        val mainCommand = MainCommand(this)
-        commandManager.registerCommand(mainCommand)
+    private fun applyConfig(plugin: KotlinPlugin) {
+        val localePath = Paths.get("locale")
+        plugin.saveDefaultConfig()
+        plugin.saveResource(localePath.resolve("insect.yml").toString(), false)
+        plugin.saveResource(localePath.resolve("message.yml").toString(), false)
+        standard = plugin.config("config.yml", Standard(), Standard.serializer()).config
+        insectTypeTable = plugin.config(localePath.resolve("insect.yml").toString(), InsectTypeTable(), InsectTypeTable.serializer(), alwaysRestoreDefaults = false).config
+        message = plugin.config(localePath.resolve("message.yml").toString(), Message(), Message.serializer()).config
     }
 }

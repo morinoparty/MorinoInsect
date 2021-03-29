@@ -1,7 +1,10 @@
 // More about the setup here: https://github.com/DevSrSouza/KotlinBukkitAPI/wiki/Getting-Started
 plugins {
-    kotlin("jvm") version "1.4.30"
-    kotlin("plugin.serialization") version "1.4.30"
+    val kotlinVersion = "1.4.30"
+
+    kotlin("jvm") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
+    id("org.jetbrains.dokka") version kotlinVersion
     id("net.minecrell.plugin-yml.bukkit") version "0.3.0"
     id("com.github.johnrengelman.shadow") version "6.0.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
@@ -23,13 +26,12 @@ repositories {
     maven("https://jitpack.io")
     maven("http://repo.dmulloy2.net/nexus/repository/public/")
 
-    // Annotation Command Framework
+    // Utils
     maven("https://repo.aikar.co/content/groups/aikar/")
+    maven("https://repo.minebench.de/")
 }
 
 dependencies {
-    compileOnly(kotlin("stdlib-jdk8"))
-
     // minecraft
     compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
 
@@ -43,15 +45,15 @@ dependencies {
     // plugins
     val transitive = Action<ExternalModuleDependency> { isTransitive = false }
     compileOnly("com.github.MilkBowl:VaultAPI:1.7", transitive)
-    compileOnly("net.luckperms:api:5.1", transitive)
 
-    // Annotation Command Framework
+    // Utils
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
+    implementation("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
 }
 
 bukkit {
     main = "com.github.morinoparty.morinoinsect.MorinoInsect"
-    depend = listOf("KotlinBukkitAPI", "Vault", "LuckPerms")
+    depend = listOf("KotlinBukkitAPI", "Vault")
     description = "Minecraft でゴージャスな虫取りを実装するプラグインです。"
     author = "morinoparty"
     website = "https://github.com/morinoparty/MorinoInsect"
@@ -60,11 +62,11 @@ bukkit {
 tasks {
     compileKotlin {
         dependsOn("ktlintFormat")
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "11"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.time.ExperimentalTime,kotlin.ExperimentalStdlibApi"
     }
     compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "11"
         kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.time.ExperimentalTime,kotlin.ExperimentalStdlibApi"
     }
     shadowJar {
