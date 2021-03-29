@@ -29,11 +29,12 @@ data class InsectTypeTable(
     fun pickRandomType(
         catcher: Player,
         block: Material,
+        spawnType: String
         // TODO: ディレクションチェックのために引数が増える予定
     ): InsectType? {
         val types = insectMap.values.filter {
             it.rarity == pickRandomRarity().first && it.conditions.generateConditionSet()
-                .all { condition -> condition.check(catcher, block) }
+                .all { condition -> condition.check(catcher, block, spawnType) }
         }
         if (types.isEmpty()) return null
         return types.random()
