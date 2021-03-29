@@ -4,16 +4,11 @@ class areaChecker {
 
     companion object {
         fun isSquareCorner(x: Int, y: Int): Boolean {
-            if (isRightUpCorner(x, y)) {
-                return true
-            } else if (isRightDownCorner(x, y)) {
-                return true
-            } else if (isLeftUpCorner(x, y)) {
-                return true
-            } else if (isLeftDownCorner(x, y)) {
-                return true
-            } else {
-                return false
+            return when {
+                isRightUpCorner(x, y) -> true
+                isRightDownCorner(x, y) -> true
+                isLeftUpCorner(x, y) -> true
+                else -> isLeftDownCorner(x, y)
             }
         }
 
