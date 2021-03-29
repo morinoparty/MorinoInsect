@@ -8,7 +8,8 @@ class BlockCondition(
 ) : Condition {
     override fun check(
         catcher: Player,
-        block: Material
+        block: Material,
+        spawnType: String
     ): Boolean {
         return block in blocks
     }

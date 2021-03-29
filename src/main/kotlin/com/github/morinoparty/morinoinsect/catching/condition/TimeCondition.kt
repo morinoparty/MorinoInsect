@@ -8,7 +8,8 @@ class TimeCondition(
 ) : Condition {
     override fun check(
         catcher: Player,
-        block: Material
+        block: Material,
+        spawnType: String
     ): Boolean {
         return catcher.world.isDayTime == state
     }
