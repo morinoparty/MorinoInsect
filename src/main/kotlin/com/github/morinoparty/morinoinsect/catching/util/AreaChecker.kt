@@ -1,14 +1,26 @@
 package com.github.morinoparty.morinoinsect.catching.util
 
+/**
+ * 虫のスポーン範囲の角を確認するクラス
+ */
 class areaChecker {
 
     companion object {
+
+        /**
+         * 座標をもとに、それがスポーン範囲の角かどうかを確かめるメソッド
+         *
+         * @param x x座標
+         * @param y y座標
+         * @return スポーン範囲の角であればtrue、そうでなければfalseを返す
+         */
         fun isSquareCorner(x: Int, y: Int): Boolean {
             return when {
                 isRightUpCorner(x, y) -> true
                 isRightDownCorner(x, y) -> true
                 isLeftUpCorner(x, y) -> true
-                else -> isLeftDownCorner(x, y)
+                isLeftDownCorner(x, y) -> true
+                else -> false
             }
         }
 
