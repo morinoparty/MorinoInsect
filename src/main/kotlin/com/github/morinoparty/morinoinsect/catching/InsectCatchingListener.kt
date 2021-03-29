@@ -14,7 +14,7 @@ import java.util.ArrayList
  *
  * @property plugin
  */
-class CatchingListener(private val plugin: MorinoInsect) : Listener {
+class InsectCatchingListener(private val plugin: MorinoInsect) : Listener {
 
     /** クールタイムをかけられたプレイヤーを入れておくリスト */
     private val playerInCoolTime: MutableList<Player> = ArrayList()
