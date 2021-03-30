@@ -19,7 +19,7 @@ class MorinoInsect : KotlinPlugin() {
     override fun onPluginEnable() {
 
         server.pluginManager.apply {
-            //リスナーの登録
+            // リスナーの登録
         }
 
         val manager = PaperCommandManager(this)
