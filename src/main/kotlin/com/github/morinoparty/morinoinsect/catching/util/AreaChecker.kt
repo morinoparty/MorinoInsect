@@ -3,7 +3,7 @@ package com.github.morinoparty.morinoinsect.catching.util
 /**
  * 虫のスポーン範囲の角を確認するクラス
  */
-class areaChecker {
+class AreaChecker {
 
     companion object {
 
