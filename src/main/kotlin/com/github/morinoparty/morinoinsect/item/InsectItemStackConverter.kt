@@ -79,7 +79,7 @@ class InsectItemStackConverter(
                     addEnchant(enchantment, level, true)
                 }
             }
-            insectWriter.write(this, insectType.rarity, insect.length)
+            insectWriter.write(this, insect)
         }
 
         insectType.icon.skullTexture?.let {
