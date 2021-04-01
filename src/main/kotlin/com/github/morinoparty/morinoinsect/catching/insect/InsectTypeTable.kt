@@ -1,6 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.insect
 
-import com.github.morinoparty.morinoinsect.catching.area.SpawnType
+import com.github.morinoparty.morinoinsect.catching.SpawnType
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import kotlin.random.Random

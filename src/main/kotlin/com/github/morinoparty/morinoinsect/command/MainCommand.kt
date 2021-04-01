@@ -7,7 +7,7 @@ import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
-import com.github.morinoparty.morinoinsect.catching.area.SpawnType
+import com.github.morinoparty.morinoinsect.catching.SpawnType
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.item.InsectItemStackConverter
 import org.bukkit.ChatColor

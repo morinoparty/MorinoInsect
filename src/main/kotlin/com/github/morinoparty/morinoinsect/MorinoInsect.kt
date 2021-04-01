@@ -3,7 +3,7 @@ package com.github.morinoparty.morinoinsect
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import co.aikar.commands.PaperCommandManager
 import com.github.morinoparty.morinoinsect.catching.SpawningInsectsListener
-import com.github.morinoparty.morinoinsect.catching.area.SpawnType
+import com.github.morinoparty.morinoinsect.catching.SpawnType
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.command.MainCommand
 import com.github.morinoparty.morinoinsect.configuration.Config

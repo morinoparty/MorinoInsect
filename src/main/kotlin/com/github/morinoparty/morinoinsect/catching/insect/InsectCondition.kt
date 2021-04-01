@@ -1,6 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.insect
 
-import com.github.morinoparty.morinoinsect.catching.area.SpawnType
+import com.github.morinoparty.morinoinsect.catching.SpawnType
 import com.github.morinoparty.morinoinsect.catching.condition.BlockCondition
 import com.github.morinoparty.morinoinsect.catching.condition.Condition
 import com.github.morinoparty.morinoinsect.catching.condition.SpawnTypeCondition
