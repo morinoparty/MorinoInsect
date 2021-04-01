@@ -26,7 +26,7 @@ insectMap:
       blocks:
         - "sand"
         - "stone"
-      direction: "ONTREE"
+      spawnType: "ontree"
       time: "night"
     icon:
       id: "paper"
@@ -35,9 +35,6 @@ insectMap:
       comment:
         - "カブトムシ！"
         - "おいしい！"
-      enchantments:
-        - "silk_touch|1"
-        - "respiration|2"
   Hornworm:
     rarity: "rare"
     name: "いもむし"
@@ -46,10 +43,24 @@ insectMap:
     conditions:
       blocks:
         - "stone"
-      direction: "ONGROUND"
+      spawnType: "onground"
     icon:
       id: "stone_sword"
       customModelData: 2
       enchantments:
         - "mending|1"
-
+  Kuwagata:
+    rarity: "rare"
+    name: "クワガタムシ"
+    lengthMin: 30
+    lengthMax: 500
+    conditions:
+      blocks:
+        - "stone"
+      spawnType: "onground"
+    icon:
+      id: "cookie"
+      customModelData: 22
+      enchantments:
+        - "silk_touch|1"
+        - "respiration|2"

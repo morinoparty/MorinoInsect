@@ -18,7 +18,7 @@ import org.bukkit.Material
 @Serializable
 data class InsectCondition(
     val blocks: List<String> = emptyList(),
-    val direction: String = "",
+    val spawnType: String = "",
     val time: String? = null
 ) {
     /**

@@ -3,6 +3,7 @@ package com.github.morinoparty.morinoinsect.item
 import com.destroystokyo.paper.profile.ProfileProperty
 import com.github.morinoparty.morinoinsect.catching.insect.Insect
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
+import com.github.morinoparty.morinoinsect.configuration.Config
 import com.github.morinoparty.morinoinsect.configuration.toComponent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
@@ -37,7 +38,7 @@ class InsectItemStackConverter(
      * @return 昆虫ならtrueを返します
      */
     fun isInsect(itemStack: ItemStack): Boolean {
-        val meta = itemStack.itemMeta ?: throw IllegalStateException()
+        val meta = itemStack.itemMeta
         return insectReader.canRead(meta)
     }
 
@@ -72,14 +73,14 @@ class InsectItemStackConverter(
                     .decoration(TextDecoration.ITALIC, false)
             )
             // TODO: 説明文のリプレイス
-            lore(insectTypeTable.itemFormat.description.plus(insectType.icon.comment.orEmpty()).toComponent())
+            lore(Config.insectConfig.itemFormat.description.plus(insectType.icon.comment.orEmpty()).toComponent())
             setCustomModelData(insectType.icon.customModelData)
             insectType.icon.enchantments?.let {
                 for ((enchantment, level) in generateEnchantments(insectType.icon.enchantments)) {
                     addEnchant(enchantment, level, true)
                 }
             }
-            insectWriter.write(this, insectType.rarity, insect.length)
+            insectWriter.write(this, insect)
         }
 
         insectType.icon.skullTexture?.let {
