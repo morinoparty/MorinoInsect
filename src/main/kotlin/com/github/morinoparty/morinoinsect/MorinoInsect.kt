@@ -1,6 +1,7 @@
 package com.github.morinoparty.morinoinsect
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
+import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.registerEvents
 import co.aikar.commands.PaperCommandManager
 import com.github.morinoparty.morinoinsect.catching.SpawningInsectsListener
 import com.github.morinoparty.morinoinsect.catching.SpawnType
@@ -22,6 +23,7 @@ class MorinoInsect : KotlinPlugin() {
 
         server.pluginManager.apply {
             val spawningInsectsListener = SpawningInsectsListener(this@MorinoInsect)
+            registerEvents(spawningInsectsListener)
         }
 
         val manager = PaperCommandManager(this)
