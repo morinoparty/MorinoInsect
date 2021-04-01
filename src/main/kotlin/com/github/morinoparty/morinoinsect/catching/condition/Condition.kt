@@ -20,7 +20,6 @@ interface Condition {
      */
     fun check(
         catcher: Player,
-        block: Material,
-        spawnType: SpawnType
+        block: Material
     ): Boolean
 }

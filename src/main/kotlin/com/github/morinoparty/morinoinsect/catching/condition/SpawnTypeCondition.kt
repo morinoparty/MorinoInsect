@@ -9,9 +9,23 @@ class SpawnTypeCondition(
 ) : Condition {
     override fun check(
         catcher: Player,
-        block: Material,
-        spawnType: SpawnType
+        block: Material
     ): Boolean {
-        return spawnType == this.spawnType
+        return convertToSpawnType(block) == spawnType
+    }
+
+    private fun convertToSpawnType(block: Material): SpawnType {
+        val treeBlocks = arrayOf(
+            Material.OAK_LOG,
+            Material.DARK_OAK_LOG,
+            Material.JUNGLE_LOG,
+            Material.ACACIA_LOG,
+            Material.BIRCH_LOG,
+            Material.SPRUCE_LOG
+        )
+        return when (block in treeBlocks) {
+            true -> SpawnType.ONTREE
+            false -> SpawnType.ONGROUND
+        }
     }
 }
