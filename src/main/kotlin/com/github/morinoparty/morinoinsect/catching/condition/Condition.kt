@@ -15,7 +15,6 @@ interface Condition {
      *
      * @param catcher 虫を捕まえるプレイヤー
      * @param block スポーンさせるブロック
-     * @param spawnType 虫のスポーンタイプ
      * @return チェックに合格すればtrueを返します
      */
     fun check(
