@@ -67,7 +67,7 @@ class AreaChecker {
                 AreaCoordinates(-3, -3)
             )
             for (i in 0..leftDownCorner.size step 1) {
-                leftDownCorner[i].x == x && leftDownCorner[i].y == y
+                return leftDownCorner[i].x == x && leftDownCorner[i].y == y
             }
             return false
         }
