@@ -6,4 +6,4 @@ package com.github.morinoparty.morinoinsect.catching.area
  * @property x x座標
  * @property y y座標
  */
-data class AreaCordinates(val x: Int, val y: Int)
+data class AreaCoordinates(val x: Int, val y: Int)
