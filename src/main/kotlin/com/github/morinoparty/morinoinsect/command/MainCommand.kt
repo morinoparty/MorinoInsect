@@ -61,7 +61,7 @@ class MainCommand(
 
         val spawnType = SpawnType.valueOf(spawnTypeName)
 
-        val insect = insectTypeTable.pickRandomType(sender, block, spawnType)?.generateInsect()
+        val insect = insectTypeTable.pickRandomType(sender, block)?.generateInsect()
             ?: return sender.sendMessage("このあたりに虫はいないようだ")
         val insectItem = converter.createItemStack(sender, insect)
 
