@@ -1,5 +1,6 @@
 package com.github.morinoparty.morinoinsect.configuration
 
+import com.github.morinoparty.morinoinsect.catching.insect.InsectCatchingNet
 import com.github.morinoparty.morinoinsect.catching.insect.InsectRarity
 import com.github.morinoparty.morinoinsect.catching.insect.InsectType
 import com.github.morinoparty.morinoinsect.catching.insect.ItemFormat
@@ -16,6 +17,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class InsectConfig(
     val itemFormat: ItemFormat = ItemFormat(),
+    val insectCatchingNet: InsectCatchingNet = InsectCatchingNet(),
     val rarityMap: Map<String, InsectRarity> = emptyMap(),
     val insectMap: Map<String, InsectType> = emptyMap()
 )

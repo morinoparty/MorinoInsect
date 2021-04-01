@@ -5,6 +5,13 @@ itemFormat:
     - "&7とった: &b%player%"
     - "&7さいず: &f%length% mm"
     - "&7ひづけ: &f%localtime_timezone_Asia/Tokyo,yyyy/MM/dd%"
+insectCatchingNet:
+  name: "虫取り網"
+  id: "clock"
+  customModelData: 1
+  description:
+    - "虫取り網！"
+    - "おいしい虫を捕まえるの！"
 rarityMap:
   common:
     name: "コモン"

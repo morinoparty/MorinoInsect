@@ -9,10 +9,12 @@ import com.github.morinoparty.morinoinsect.command.MainCommand
 import com.github.morinoparty.morinoinsect.configuration.Config
 import com.github.morinoparty.morinoinsect.item.InsectItemStackConverter
 import org.bukkit.Material
+import org.bukkit.inventory.ItemStack
 
 class MorinoInsect : KotlinPlugin() {
     init { Config.load(this) }
 
+    val insectCatchingNet = ItemStack(Config.insectConfig.insectCatchingNet.createInsectNet())
     val insectTypeTable = InsectTypeTable(Config.insectConfig.rarityMap, Config.insectConfig.insectMap)
     val converter = InsectItemStackConverter(this, insectTypeTable)
 
