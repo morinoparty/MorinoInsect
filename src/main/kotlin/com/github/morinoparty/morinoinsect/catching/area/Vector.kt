@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.catching.util
+package com.github.morinoparty.morinoinsect.catching.area
 
 // 範囲指定の時に必要なので作った
 /**

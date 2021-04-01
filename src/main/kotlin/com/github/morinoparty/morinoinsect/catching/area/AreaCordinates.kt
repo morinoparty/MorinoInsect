@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.catching.util
+package com.github.morinoparty.morinoinsect.catching.area
 
 /**
  * 範囲の座標を指定する用のデータクラス

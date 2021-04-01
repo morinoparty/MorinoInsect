@@ -1,15 +1,16 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
+import com.github.morinoparty.morinoinsect.catching.area.SpawnType
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
 class SpawnTypeCondition(
-    private val type: String
+    private val type: SpawnType
 ) : Condition {
     override fun check(
         catcher: Player,
         block: Material,
-        spawnType: String
+        spawnType: SpawnType
     ): Boolean {
         return spawnType == type
     }

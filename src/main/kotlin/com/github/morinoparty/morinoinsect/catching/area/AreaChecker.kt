@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.catching.util
+package com.github.morinoparty.morinoinsect.catching.area
 
 /**
  * 虫のスポーン範囲の角を確認するクラス

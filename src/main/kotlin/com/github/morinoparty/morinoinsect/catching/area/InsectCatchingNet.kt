@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.catching.util
+package com.github.morinoparty.morinoinsect.catching.area
 
 import net.kyori.adventure.text.Component
 import org.bukkit.Material

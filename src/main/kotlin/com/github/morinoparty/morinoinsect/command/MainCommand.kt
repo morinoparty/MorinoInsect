@@ -58,7 +58,7 @@ class MainCommand(
             ?: return sender.sendMessage("そのアイテムは存在しません")
         if (!block.isBlock) return sender.sendMessage("それはブロックではありません")
 
-        val insect = insectTypeTable.pickRandomType(sender, block)?.generateInsect()
+        val insect = insectTypeTable.pickRandomType(sender, block, "")?.generateInsect()
             ?: return sender.sendMessage("このあたりに虫はいないようだ")
         val insectItem = converter.createItemStack(sender, insect)
 

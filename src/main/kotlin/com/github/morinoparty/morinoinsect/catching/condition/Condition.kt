@@ -1,5 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
+import com.github.morinoparty.morinoinsect.catching.area.SpawnType
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
@@ -21,6 +22,6 @@ interface Condition {
     fun check(
         catcher: Player,
         block: Material,
-        spawnType: String
+        spawnType: SpawnType
     ): Boolean
 }
