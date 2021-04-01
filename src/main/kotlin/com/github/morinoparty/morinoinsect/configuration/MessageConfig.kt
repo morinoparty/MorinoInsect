@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * @author うにたろう
  */
 @Serializable
-data class Message(
+data class MessageConfig(
     val testMessage: String = "",
     val sampleMessage: String = ""
 )

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
  * 基本的なコンフィグを格納するデータクラス
  */
 @Serializable
-data class Standard(
+data class StandardConfig(
     val general: General = General()
 ) {
     @Serializable

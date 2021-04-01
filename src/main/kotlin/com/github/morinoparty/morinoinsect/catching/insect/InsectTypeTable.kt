@@ -1,23 +1,12 @@
 package com.github.morinoparty.morinoinsect.catching.insect
 
-import kotlinx.serialization.Serializable
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import kotlin.random.Random
 
-/**
- * 虫一覧やレアリティ一覧を格納するデータクラス
- *
- * @param itemFormat アイテムの基本説明文
- * @param rarityMap レアリティのリスト
- * @param insectMap 虫のリスト
- * @author うにたろう
- */
-@Serializable
-data class InsectTypeTable(
-    val itemFormat: ItemFormat = ItemFormat(),
-    val rarityMap: Map<String, InsectRarity> = emptyMap(),
-    val insectMap: Map<String, InsectType> = emptyMap()
+class InsectTypeTable(
+    val rarityMap: Map<String, InsectRarity>,
+    val insectMap: Map<String, InsectType>
 ) {
     /**
      * 虫のリストからランダムに一匹を生成する。レアリティをランダムに決定し、レアリティに合う虫を選別し、コンディションをチェックして、ランダムに一匹を選びます。
