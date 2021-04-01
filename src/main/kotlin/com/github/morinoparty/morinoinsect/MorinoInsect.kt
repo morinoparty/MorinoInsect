@@ -24,9 +24,6 @@ class MorinoInsect : KotlinPlugin() {
         completions.registerAsyncCompletion("blocks") {
             Material.values().filter { it.isSolid }.map { block -> block.toString().toLowerCase() }
         }
-        logger.info(Config.toString())
-        logger.info(insectTypeTable.toString())
-        logger.info(converter.toString())
     }
 
     override fun onPluginDisable() {
