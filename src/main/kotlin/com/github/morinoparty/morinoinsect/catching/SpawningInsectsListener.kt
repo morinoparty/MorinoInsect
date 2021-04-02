@@ -50,7 +50,10 @@ class SpawningInsectsListener(
         val insectItem = plugin.converter.createItemStack(catcher, insect)
         val insectItemFrame: ItemFrame =
             catcher.world.spawnEntity(spawnBlock.location, EntityType.ITEM_FRAME) as ItemFrame
-        insectItemFrame.setItem(insectItem)
+        insectItemFrame.also {
+            it.setItem(insectItem)
+            it.setFacingDirection(spawnType)
+        }
 
         // 透明化させるために一旦はItemFrameにキャストした物を後でLivingEntityにキャストしている
         insectItemFrame as LivingEntity
