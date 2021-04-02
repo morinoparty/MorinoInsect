@@ -7,11 +7,13 @@ import co.aikar.commands.annotation.CommandPermission
 import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
-import com.github.morinoparty.morinoinsect.catching.SpawnType
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.item.InsectItemStackConverter
 import org.bukkit.ChatColor
+import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.block.Block
+import org.bukkit.block.BlockFace
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
@@ -59,9 +61,13 @@ class MainCommand(
             ?: return sender.sendMessage("そのアイテムは存在しません")
         if (!block.isBlock) return sender.sendMessage("それはブロックではありません")
 
-        val spawnType = SpawnType.valueOf(spawnTypeName)
+        val spawnType = BlockFace.valueOf(spawnTypeName)
 
-        val insect = insectTypeTable.pickRandomType(sender, block)?.generateInsect()
+        // 本当はちゃんとブロックを指定しなければならないがデバッグ用なので適当な座標のブロックを取得している
+        val debugLocation = Location(sender.world, 0.0, 200.0, 0.0)
+        val debugBlock: Block = debugLocation.block
+
+        val insect = insectTypeTable.pickRandomType(sender, debugBlock, spawnType)?.generateInsect()
             ?: return sender.sendMessage("このあたりに虫はいないようだ")
         val insectItem = converter.createItemStack(sender, insect)
 

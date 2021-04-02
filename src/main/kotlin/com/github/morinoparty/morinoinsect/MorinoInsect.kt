@@ -3,13 +3,13 @@ package com.github.morinoparty.morinoinsect
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.registerEvents
 import co.aikar.commands.PaperCommandManager
-import com.github.morinoparty.morinoinsect.catching.SpawnType
 import com.github.morinoparty.morinoinsect.catching.SpawningInsectsListener
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.command.MainCommand
 import com.github.morinoparty.morinoinsect.configuration.Config
 import com.github.morinoparty.morinoinsect.item.InsectItemStackConverter
 import org.bukkit.Material
+import org.bukkit.block.BlockFace
 import org.bukkit.inventory.ItemStack
 
 class MorinoInsect : KotlinPlugin() {
@@ -34,7 +34,7 @@ class MorinoInsect : KotlinPlugin() {
         completions.registerAsyncCompletion("blocks") {
             Material.values().filter { it.isSolid }.map { block -> block.toString().toLowerCase() }
         }
-        completions.registerAsyncCompletion("spawnType") { SpawnType.values().map { it.toString().toLowerCase() } }
+        completions.registerAsyncCompletion("spawnType") { BlockFace.values().map { it.toString().toLowerCase() } }
     }
 
     override fun onPluginDisable() {
