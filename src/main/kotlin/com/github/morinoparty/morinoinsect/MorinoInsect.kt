@@ -34,7 +34,9 @@ class MorinoInsect : KotlinPlugin() {
         completions.registerAsyncCompletion("blocks") {
             Material.values().filter { it.isSolid }.map { block -> block.toString().toLowerCase() }
         }
-        completions.registerAsyncCompletion("spawnType") { BlockFace.values().map { it.toString().toLowerCase() } }
+        completions.registerAsyncCompletion("spawnType") {
+            BlockFace.values().map { it.toString().toLowerCase() }
+        }
     }
 
     override fun onPluginDisable() {
