@@ -8,7 +8,6 @@ import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.ItemFrame
-import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -49,15 +48,11 @@ class SpawningInsectsListener(
         )?.generateInsect() ?: throw IllegalStateException("条件に当てはまる虫はありませんでした")
         val insectItem = plugin.converter.createItemStack(catcher, insect)
         val insectItemFrame: ItemFrame =
-            catcher.world.spawnEntity(spawnBlock.location, EntityType.ITEM_FRAME) as ItemFrame
-        insectItemFrame.also {
-            it.setItem(insectItem)
-            it.setFacingDirection(spawnType)
-        }
-
-        // 透明化させるために一旦はItemFrameにキャストした物を後でLivingEntityにキャストしている
-        insectItemFrame as LivingEntity
-        insectItemFrame.isInvisible = true
+            (catcher.world.spawnEntity(spawnBlock.location, EntityType.ITEM_FRAME) as ItemFrame).also {
+                it.setItem(insectItem)
+                it.setFacingDirection(spawnType)
+                it.isVisible = true
+            }
     }
 
     // プレイヤーの周り（半径３ブロックの円）にあるブロックを検知して返すメソッド
