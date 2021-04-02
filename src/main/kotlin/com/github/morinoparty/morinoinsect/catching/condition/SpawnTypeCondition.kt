@@ -1,31 +1,31 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
-import com.github.morinoparty.morinoinsect.catching.SpawnType
 import org.bukkit.Material
+import org.bukkit.block.Block
+import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 
 class SpawnTypeCondition(
-    private val spawnType: SpawnType
+    private val type: Collection<BlockFace>
 ) : Condition {
     override fun check(
         catcher: Player,
-        block: Material
+        block: Block,
+        spawnType: BlockFace
     ): Boolean {
-        return convertToSpawnType(block) == spawnType
+        return spawnType in type && checkSpawnLocationNotBuried(spawnType, block)
     }
 
-    private fun convertToSpawnType(block: Material): SpawnType {
-        val treeBlocks = arrayOf(
-            Material.OAK_LOG,
-            Material.DARK_OAK_LOG,
-            Material.JUNGLE_LOG,
-            Material.ACACIA_LOG,
-            Material.BIRCH_LOG,
-            Material.SPRUCE_LOG
-        )
-        return when (block in treeBlocks) {
-            true -> SpawnType.ONTREE
-            false -> SpawnType.ONGROUND
+    // スポーン場所がブロックで埋もれていないか確認するメソッド
+    private fun checkSpawnLocationNotBuried(spawnType: BlockFace, spawnBlock: Block): Boolean {
+        return when (spawnType) {
+            BlockFace.EAST -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            BlockFace.WEST -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            BlockFace.SOUTH -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            BlockFace.NORTH -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            BlockFace.UP -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            BlockFace.DOWN -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            else -> throw IllegalStateException("予期しないエラーが起きました")
         }
     }
 }

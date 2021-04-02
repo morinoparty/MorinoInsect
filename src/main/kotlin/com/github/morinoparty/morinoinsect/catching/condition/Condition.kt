@@ -1,6 +1,7 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
-import org.bukkit.Material
+import org.bukkit.block.Block
+import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 
 /**
@@ -19,6 +20,8 @@ interface Condition {
      */
     fun check(
         catcher: Player,
-        block: Material
+        block: Block,
+        spawnType: BlockFace
+        // ToDo: [東、西、北、南、上、下]の６つのタイプから成るspawnTypeを作り、指定したスポーンタイプの隣がブロックで埋もれてないかも同時にチェックする
     ): Boolean
 }
