@@ -5,11 +5,11 @@ import com.github.morinoparty.morinoinsect.catching.insect.Insect
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.configuration.Config
 import com.github.morinoparty.morinoinsect.configuration.toComponent
+import com.github.morinoparty.morinoinsect.util.NamespacedKeyUtils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
@@ -60,8 +60,7 @@ class InsectItemStackConverter(
      */
     fun createItemStack(catcher: Player, insect: Insect): ItemStack {
         val insectType = insect.type
-        val material = Material.matchMaterial(insectType.icon.id)
-            ?: throw IllegalStateException("${insectType.icon.id} というアイテムは存在しません")
+        val material = NamespacedKeyUtils.material(insect.type.icon.id)
         val itemStack = ItemStack(material, 1)
 
         itemStack.edit<ItemMeta> {
@@ -96,9 +95,7 @@ class InsectItemStackConverter(
     private fun generateEnchantments(enchantments: List<String>): Map<Enchantment, Int> {
         return enchantments.map {
             val tokens = it.split(DELIMITER)
-            val id = NamespacedKey.minecraft(tokens[0])
-            val enchantment: Enchantment = Enchantment.getByKey(id)
-                ?: throw IllegalStateException("IDが${id}のエンチャントは存在しません")
+            val enchantment: Enchantment = NamespacedKeyUtils.enchantment(tokens[0])
             val level = tokens[1].toInt()
             Pair(enchantment, level)
         }.toMap()

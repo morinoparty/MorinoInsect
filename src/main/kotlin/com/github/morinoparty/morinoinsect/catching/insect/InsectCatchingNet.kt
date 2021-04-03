@@ -2,6 +2,7 @@ package com.github.morinoparty.morinoinsect.catching.insect
 
 import com.github.morinoparty.morinoinsect.configuration.toComponent
 import com.github.morinoparty.morinoinsect.item.edit
+import com.github.morinoparty.morinoinsect.util.NamespacedKeyUtils
 import kotlinx.serialization.Serializable
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -16,10 +17,9 @@ data class InsectCatchingNet(
     val description: List<String> = listOf()
 ) {
     fun createInsectNet(): ItemStack {
-        val material = Material.matchMaterial(id.toUpperCase())
-            ?: throw IllegalStateException("$id というアイテムは存在しません")
-        val itemStack = ItemStack(material)
-
+        val material = NamespacedKeyUtils.material(id)
+        val itemStack = ItemStack(Material.CLOCK)
+        Material.matchMaterial("minecraft:clock")
         itemStack.edit<ItemMeta> {
             displayName(name.toComponent())
             setCustomModelData(this@InsectCatchingNet.customModelData)
