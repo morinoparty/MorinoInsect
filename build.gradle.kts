@@ -57,6 +57,7 @@ bukkit {
     description = "Minecraft でゴージャスな虫取りを実装するプラグインです。"
     author = "morinoparty"
     website = "https://github.com/morinoparty/MorinoInsect"
+    apiVersion = "1.16"
 }
 
 tasks {
