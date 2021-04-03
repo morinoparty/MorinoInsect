@@ -16,13 +16,13 @@ data class InsectCatchingNet(
     val description: List<String> = listOf()
 ) {
     fun createInsectNet(): ItemStack {
-        val material = Material.matchMaterial(name)
+        val material = Material.matchMaterial(id.toUpperCase())
             ?: throw IllegalStateException("$id というアイテムは存在しません")
         val itemStack = ItemStack(material)
 
         itemStack.edit<ItemMeta> {
             displayName(name.toComponent())
-            setCustomModelData(customModelData)
+            setCustomModelData(this@InsectCatchingNet.customModelData)
             lore(description.toComponent())
         }
         return itemStack

@@ -16,11 +16,13 @@ import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 
 @CommandAlias("morinoinsect|mi|insect")
 class MainCommand(
     private val insectTypeTable: InsectTypeTable,
-    private val converter: InsectItemStackConverter
+    private val converter: InsectItemStackConverter,
+    private val catchingNet: ItemStack
 ) : BaseCommand() {
     private val pluginName = "MorinoInsect"
 
@@ -29,6 +31,13 @@ class MainCommand(
     @CommandPermission("moripa.help")
     fun help(sender: CommandSender) {
         sender.sendMessage("${ChatColor.DARK_AQUA}> =====${ChatColor.AQUA}${ChatColor.BOLD}$pluginName ${ChatColor.DARK_AQUA} ===== <")
+    }
+
+    @Subcommand("net")
+    @CommandPermission("moripa.mod")
+    fun net(sender: CommandSender) {
+        if (sender !is Player) return sender.sendMessage("プレイヤーじゃねえだろ")
+        sender.inventory.addItem(catchingNet)
     }
 
     /**
@@ -53,8 +62,8 @@ class MainCommand(
      */
     @Subcommand("randompickup")
     @CommandPermission("moripa.debug")
-    @CommandCompletion("@blocks @spawnType")
-    fun randomPickUp(sender: CommandSender, blockName: String, spawnTypeName: String) {
+    @CommandCompletion("@blocks @spawnType x y z")
+    fun randomPickUp(sender: CommandSender, blockName: String, spawnTypeName: String, args: Array<String>) {
         if (sender !is Player) return
 
         val block = Material.matchMaterial(blockName)
@@ -64,7 +73,7 @@ class MainCommand(
         val spawnType = BlockFace.valueOf(spawnTypeName)
 
         // 本当はちゃんとブロックを指定しなければならないがデバッグ用なので適当な座標のブロックを取得している
-        val debugLocation = Location(sender.world, 0.0, 200.0, 0.0)
+        val debugLocation = Location(sender.world, args[0].toDouble(), args[1].toDouble(), args[2].toDouble())
         val debugBlock: Block = debugLocation.block
 
         val insect = insectTypeTable.pickRandomType(sender, debugBlock, spawnType)?.generateInsect()

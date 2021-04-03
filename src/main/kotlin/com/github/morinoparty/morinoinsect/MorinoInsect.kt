@@ -28,7 +28,7 @@ class MorinoInsect : KotlinPlugin() {
 
         val manager = PaperCommandManager(this)
         val completions = manager.commandCompletions
-        val mainCommand = MainCommand(insectTypeTable, converter)
+        val mainCommand = MainCommand(insectTypeTable, converter, insectCatchingNet)
         manager.registerCommand(mainCommand)
         completions.registerAsyncCompletion("insects") { insectTypeTable.insectMap.values.map { it.name } }
         completions.registerAsyncCompletion("blocks") {
