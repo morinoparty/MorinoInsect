@@ -13,7 +13,7 @@ import org.bukkit.block.BlockFace
  *
  * @constructor 虫のコンディション一覧
  * @param blocks スポーン可能なブロック (例：stone,dark_oak_log)
- * @param direction スポーンする位置 (例：tree|ground)
+ * @param spawnTypes スポーンする向き (WEST, SOUTH, NORTH, EAST, UP, DOWN)
  * @param time スポーンする時間　(day or night)
  * @author うにたろう
  */
