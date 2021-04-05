@@ -16,12 +16,12 @@ interface Condition {
      *
      * @param catcher 虫を捕まえるプレイヤー
      * @param block スポーンさせるブロック
+     * @param spawnType 虫のスポーンする向き
      * @return チェックに合格すればtrueを返します
      */
     fun check(
         catcher: Player,
         block: Block,
         spawnType: BlockFace
-        // ToDo: [東、西、北、南、上、下]の６つのタイプから成るspawnTypeを作り、指定したスポーンタイプの隣がブロックで埋もれてないかも同時にチェックする
     ): Boolean
 }
