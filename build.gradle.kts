@@ -72,7 +72,7 @@ tasks {
     }
     shadowJar {
         relocate("co.aikar.commands", "com.github.morinoparty.morinoinsect.acf")
-        classifier = null
+        archiveClassifier.set("")
     }
     build {
         dependsOn(shadowJar)
