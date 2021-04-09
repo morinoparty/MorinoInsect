@@ -1,7 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.insect
 
 import org.bukkit.block.Block
-import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 import kotlin.random.Random
 
@@ -19,7 +18,7 @@ class InsectTypeTable(
     fun pickRandomType(
         catcher: Player,
         block: Block,
-        spawnType: BlockFace
+        spawnType: SpawnType
         // TODO: ディレクションチェックのために引数が増える予定
     ): InsectType? {
         val types = insectMap.values.filter {

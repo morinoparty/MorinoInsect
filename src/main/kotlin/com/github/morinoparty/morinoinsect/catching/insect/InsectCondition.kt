@@ -6,7 +6,6 @@ import com.github.morinoparty.morinoinsect.catching.condition.SpawnTypeCondition
 import com.github.morinoparty.morinoinsect.catching.condition.TimeCondition
 import kotlinx.serialization.Serializable
 import org.bukkit.Material
-import org.bukkit.block.BlockFace
 
 /**
  * 虫のコンディションデータクラス
@@ -30,7 +29,7 @@ data class InsectCondition(
         return setOfNotNull(
             BlockCondition(blocks.map { Material.valueOf(it.toUpperCase()) }),
             TimeCondition(time?.replace("day", "true")?.replace("night", "false").toBoolean()),
-            SpawnTypeCondition(spawnTypes.map { BlockFace.valueOf(it.toUpperCase()) })
+            SpawnTypeCondition(spawnTypes.map { SpawnType.valueOf(it.toUpperCase()) })
         )
     }
 }
