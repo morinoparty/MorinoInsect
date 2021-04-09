@@ -8,7 +8,7 @@ package com.github.morinoparty.morinoinsect.catching.area
  * @param y y軸
  * @param z z軸
  */
-data class Vector(
+data class AreaRange(
     val x: IntRange,
     val y: IntRange,
     val z: IntRange
