@@ -9,7 +9,7 @@ package com.github.morinoparty.morinoinsect.catching.area
  * @param z z軸
  */
 data class Vector(
-    val x: Int,
-    val y: Int,
-    val z: Int
+    val x: IntRange,
+    val y: IntRange,
+    val z: IntRange
 )
