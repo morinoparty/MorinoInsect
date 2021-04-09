@@ -2,14 +2,12 @@ package com.github.morinoparty.morinoinsect.catching
 
 import com.github.morinoparty.morinoinsect.MorinoInsect
 import com.github.morinoparty.morinoinsect.catching.area.AreaChecker
-import com.github.morinoparty.morinoinsect.catching.area.Vector
+import com.github.morinoparty.morinoinsect.catching.area.AreaRange
 import com.github.morinoparty.morinoinsect.catching.insect.Insect
-import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import org.bukkit.Material
 import org.bukkit.block.Block
-import org.bukkit.entity.EntityType
 import org.bukkit.entity.ItemFrame
-import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -34,35 +32,26 @@ class SpawningInsectsListener(
             player.inventory.itemInMainHand == catchingNet
         if (!playerHasInsectCatchingNet) return
         val spawnBlock = detectBlocksAroundPlayer(player).random()
-        val spawnType = SpawnType.values().random()
+        val spawnType = SpawnDirection.values().random()
         spawnInsect(player, spawnBlock, spawnType)
     }
 
     // 虫をランダムに選んでスポーンさせるメソッド
-    private fun spawnInsect(catcher: Player, spawnBlock: Block, spawnType: SpawnType) {
+    private fun spawnInsect(catcher: Player, spawnBlock: Block, spawnDirection: SpawnDirection) {
         val insect: Insect = plugin.insectTypeTable.pickRandomType(
-            catcher = catcher,
-            block = spawnBlock,
-            spawnType = spawnType
+            catcher,
+            spawnBlock,
+            spawnDirection
         )?.generateInsect() ?: return
         val insectItem = plugin.converter.createItemStack(catcher, insect)
-        val insectItemFrame: ItemFrame = (
-            catcher.world.spawnEntity(
-                spawnBlock.location.add(0.0, 1.0, 0.0),
-                EntityType.ITEM_FRAME
-            ) as ItemFrame
-            ).also {
+        val insectItemFrame = catcher.world.spawn(
+            spawnBlock.location.add(0.0, 1.0, 0.0),
+            ItemFrame::class.java
+        ).also {
             it.setItem(insectItem)
-            it.setFacingDirection(spawnType.direction)
+            it.setFacingDirection(spawnDirection.direction)
+            it.isVisible = false
         }
-
-        // 額縁にランダムに選んだ虫を付けるために一度ItemFrameにキャストする必要がある
-        // ToDo: insectItemFrameにキャストできないエラーを治す
-        (insectItemFrame as LivingEntity).also {
-            it.isInvisible = true
-            it.isInvulnerable = true
-        }
-
         // デバッグ用
         println("${insectItemFrame}がスポーンしました！")
     }
@@ -70,7 +59,7 @@ class SpawningInsectsListener(
     // プレイヤーの周り（半径３ブロックの円）にあるブロックを検知して返すメソッド
     private fun detectBlocksAroundPlayer(player: Player): MutableSet<Block> {
         val playerLocBlock = player.location.block
-        val detectArea = Vector(-3..3, -1..3, -3..3)
+        val detectArea = AreaRange(-3..3, -1..3, -3..3)
         val detectedBlocksSet: MutableSet<Block> = mutableSetOf()
 
         // detectAreaで指定した範囲のブロックを検出してdetectedBlocksSetに入れる
