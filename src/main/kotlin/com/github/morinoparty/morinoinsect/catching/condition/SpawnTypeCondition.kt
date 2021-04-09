@@ -1,30 +1,30 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
 import org.bukkit.Material
 import org.bukkit.block.Block
-import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 
 class SpawnTypeCondition(
-    private val type: Collection<BlockFace>
+    private val type: Collection<SpawnType>
 ) : Condition {
     override fun check(
         catcher: Player,
         block: Block,
-        spawnType: BlockFace
+        spawnType: SpawnType
     ): Boolean {
         return spawnType in type && checkSpawnLocationNotBuried(spawnType, block)
     }
 
     // スポーン場所がブロックで埋もれていないか確認するメソッド
-    private fun checkSpawnLocationNotBuried(spawnType: BlockFace, spawnBlock: Block): Boolean {
+    private fun checkSpawnLocationNotBuried(spawnType: SpawnType, spawnBlock: Block): Boolean {
         return when (spawnType) {
-            BlockFace.EAST -> spawnBlock.getRelative(spawnType).type == Material.AIR
-            BlockFace.WEST -> spawnBlock.getRelative(spawnType).type == Material.AIR
-            BlockFace.SOUTH -> spawnBlock.getRelative(spawnType).type == Material.AIR
-            BlockFace.NORTH -> spawnBlock.getRelative(spawnType).type == Material.AIR
-            BlockFace.UP -> spawnBlock.getRelative(spawnType).type == Material.AIR
-            BlockFace.DOWN -> spawnBlock.getRelative(spawnType).type == Material.AIR
+            SpawnType.EAST -> spawnBlock.getRelative(spawnType.direction, 1).type == Material.AIR
+            SpawnType.WEST -> spawnBlock.getRelative(spawnType.direction, 1).type == Material.AIR
+            SpawnType.SOUTH -> spawnBlock.getRelative(spawnType.direction, 1).type == Material.AIR
+            SpawnType.NORTH -> spawnBlock.getRelative(spawnType.direction, 1).type == Material.AIR
+            SpawnType.UP -> spawnBlock.getRelative(spawnType.direction, 1).type == Material.AIR
+            SpawnType.DOWN -> spawnBlock.getRelative(spawnType.direction, 1).type == Material.AIR
             else -> throw IllegalStateException("予期しないエラーが起きました")
         }
     }

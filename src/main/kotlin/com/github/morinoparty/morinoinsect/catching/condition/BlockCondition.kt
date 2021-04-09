@@ -1,8 +1,8 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
 import org.bukkit.Material
 import org.bukkit.block.Block
-import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 
 class BlockCondition(
@@ -11,7 +11,7 @@ class BlockCondition(
     override fun check(
         catcher: Player,
         block: Block,
-        spawnType: BlockFace
+        spawnType: SpawnType
     ): Boolean {
         return block.type in blocks
     }

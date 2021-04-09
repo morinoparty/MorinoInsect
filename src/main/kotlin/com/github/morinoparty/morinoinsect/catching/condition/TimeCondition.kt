@@ -1,7 +1,7 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
 import org.bukkit.block.Block
-import org.bukkit.block.BlockFace
 import org.bukkit.entity.Player
 
 class TimeCondition(
@@ -10,7 +10,7 @@ class TimeCondition(
     override fun check(
         catcher: Player,
         block: Block,
-        spawnType: BlockFace
+        spawnType: SpawnType
     ): Boolean {
         return catcher.world.isDayTime == state
     }
