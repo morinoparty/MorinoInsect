@@ -2,7 +2,7 @@ package com.github.morinoparty.morinoinsect.catching.insect
 
 import org.bukkit.block.BlockFace
 
-enum class SpawnType(val direction: BlockFace) {
+enum class SpawnDirection(val direction: BlockFace) {
     NORTH(BlockFace.NORTH),
     EAST(BlockFace.EAST),
     SOUTH(BlockFace.SOUTH),

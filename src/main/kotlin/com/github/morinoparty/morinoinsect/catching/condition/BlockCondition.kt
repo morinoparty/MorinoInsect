@@ -1,6 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
-import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
@@ -11,7 +11,7 @@ class BlockCondition(
     override fun check(
         catcher: Player,
         block: Block,
-        spawnType: SpawnType
+        spawnDirection: SpawnDirection
     ): Boolean {
         return block.type in blocks
     }

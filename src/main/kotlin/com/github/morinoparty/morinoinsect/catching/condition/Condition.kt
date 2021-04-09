@@ -1,6 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
-import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
 
@@ -16,12 +16,12 @@ interface Condition {
      *
      * @param catcher 虫を捕まえるプレイヤー
      * @param block スポーンさせるブロック
-     * @param spawnType 虫のスポーンする向き
+     * @param spawnDirection 虫のスポーンする向き
      * @return チェックに合格すればtrueを返します
      */
     fun check(
         catcher: Player,
         block: Block,
-        spawnType: SpawnType
+        spawnDirection: SpawnDirection
     ): Boolean
 }
