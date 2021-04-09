@@ -8,12 +8,12 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnType
 import com.github.morinoparty.morinoinsect.item.InsectItemStackConverter
 import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
-import org.bukkit.block.BlockFace
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -70,7 +70,7 @@ class MainCommand(
             ?: return sender.sendMessage("そのアイテムは存在しません")
         if (!block.isBlock) return sender.sendMessage("それはブロックではありません")
 
-        val spawnType = BlockFace.valueOf(spawnTypeName)
+        val spawnType = SpawnType.valueOf(spawnTypeName)
 
         // 本当はちゃんとブロックを指定しなければならないがデバッグ用なので適当な座標のブロックを取得している
         val debugLocation = Location(sender.world, args[0].toDouble(), args[1].toDouble(), args[2].toDouble())
