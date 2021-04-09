@@ -22,51 +22,43 @@ class AreaChecker(private val x: Int, private val y: Int) {
         }
     }
 
+    // 座標がスポーン範囲の右上の角かどうか確かめるメソッド
     private fun isRightUpCorner(x: Int, y: Int): Boolean {
         val rightUpCorner = arrayOf(
             AreaCoordinates(2, 3),
             AreaCoordinates(3, 3),
             AreaCoordinates(3, 2)
         )
-        for (i in 0..rightUpCorner.size step 1) {
-            return rightUpCorner[i].x == x && rightUpCorner[i].y == y
-        }
-        return false
+        return AreaCoordinates(x, y) in rightUpCorner
     }
 
+    // 座標がスポーン範囲の右下の角かどうか確かめるメソッド
     private fun isRightDownCorner(x: Int, y: Int): Boolean {
         val rightDownCorner = arrayOf(
             AreaCoordinates(2, -3),
             AreaCoordinates(3, -2),
             AreaCoordinates(3, -3)
         )
-        for (i in 0..rightDownCorner.size step 1) {
-            return rightDownCorner[i].x == x && rightDownCorner[i].y == y
-        }
-        return false
+        return AreaCoordinates(x, y) in rightDownCorner
     }
 
+    // 座標がスポーン範囲の左上の角かどうか確かめるメソッド
     private fun isLeftUpCorner(x: Int, y: Int): Boolean {
         val leftUpCorner = arrayOf(
             AreaCoordinates(-2, 3),
             AreaCoordinates(-3, 2),
             AreaCoordinates(-3, 3)
         )
-        for (i in 0..leftUpCorner.size step 1) {
-            return leftUpCorner[i].x == x && leftUpCorner[i].y == y
-        }
-        return false
+        return AreaCoordinates(x, y) in leftUpCorner
     }
 
+    // 座標がスポーン範囲の左下の角かどうか確かめるメソッド
     private fun isLeftDownCorner(x: Int, y: Int): Boolean {
         val leftDownCorner = arrayOf(
             AreaCoordinates(-2, -3),
             AreaCoordinates(-3, -2),
             AreaCoordinates(-3, -3)
         )
-        for (i in 0..leftDownCorner.size step 1) {
-            return leftDownCorner[i].x == x && leftDownCorner[i].y == y
-        }
-        return false
+        return AreaCoordinates(x, y) in leftDownCorner
     }
 }
