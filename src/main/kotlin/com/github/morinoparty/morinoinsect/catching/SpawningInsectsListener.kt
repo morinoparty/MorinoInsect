@@ -100,9 +100,12 @@ class SpawningInsectsListener(
         )
         var spawnableFaceCount = 0
         relativeBlocks.forEach { block ->
-            if (block.type == Material.AIR) return@forEach
+            if (block.type != Material.AIR) return@forEach
             spawnableFaceCount++
         }
+
+        // デバッグ用
+        println("Spawnable Face Count is: $spawnableFaceCount")
         return spawnableFaceCount >= 1
     }
 
