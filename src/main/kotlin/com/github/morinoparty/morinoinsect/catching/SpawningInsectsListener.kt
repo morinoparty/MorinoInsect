@@ -3,6 +3,7 @@ package com.github.morinoparty.morinoinsect.catching
 import com.github.morinoparty.morinoinsect.MorinoInsect
 import com.github.morinoparty.morinoinsect.catching.area.AreaChecker
 import com.github.morinoparty.morinoinsect.catching.area.AreaRange
+import com.github.morinoparty.morinoinsect.catching.area.SpawnLocationAdjuster
 import com.github.morinoparty.morinoinsect.catching.insect.Insect
 import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import org.bukkit.Material
@@ -19,7 +20,7 @@ import org.bukkit.inventory.ItemStack
 class SpawningInsectsListener(
     private val plugin: MorinoInsect,
     private val catchingNet: ItemStack
-) : Listener {
+) : Listener, SpawnLocationAdjuster {
 
     /**
      * プレイヤーが虫網を右クリックするのを感知して虫をスポーンさせるメソッド
@@ -55,11 +56,11 @@ class SpawningInsectsListener(
         }
         val insectItem = plugin.converter.createItemStack(catcher, insect)
         val insectItemFrame = catcher.world.spawn(
-            spawnBlock.location.add(0.0, 1.0, 0.0),
+            spawnBlock.location.adjustSpawnLocation(spawnDirection.direction),
             ItemFrame::class.java
         ).also {
             it.setItem(insectItem)
-            it.setFacingDirection(spawnDirection.direction)
+            it.setFacingDirection(spawnDirection.direction, false)
             it.isVisible = false
         }
 
@@ -70,7 +71,7 @@ class SpawningInsectsListener(
     // プレイヤーの周り（半径３ブロックの円）にあるブロックを検知して返すメソッド
     private fun detectBlocksAroundPlayer(player: Player): MutableSet<Block> {
         val playerLocBlock = player.location.block
-        val detectArea = AreaRange(-3..3, -1..3, -3..3)
+        val detectArea = AreaRange(-8..8, -1..8, -8..8)
         val detectedBlocksSet: MutableSet<Block> = mutableSetOf()
 
         // detectAreaで指定した範囲のブロックを検出してdetectedBlocksSetに入れる
@@ -88,8 +89,9 @@ class SpawningInsectsListener(
         return detectedBlocksSet
     }
 
-    // ブロックが虫をスポーンできる面があるかどうか確認するメソッド
+    // ブロックが虫をスポーンできる面が１つでもあるかどうか確認するメソッド
     private fun canBlockSpawnInsects(spawnBlock: Block): Boolean {
+        var spawnableFaceCount = 0
         val relativeBlocks: MutableList<Block> = mutableListOf(
             spawnBlock.getRelative(SpawnDirection.DOWN.direction, 1),
             spawnBlock.getRelative(SpawnDirection.UP.direction, 1),
@@ -98,14 +100,10 @@ class SpawningInsectsListener(
             spawnBlock.getRelative(SpawnDirection.EAST.direction, 1),
             spawnBlock.getRelative(SpawnDirection.WEST.direction, 1)
         )
-        var spawnableFaceCount = 0
         relativeBlocks.forEach { block ->
             if (block.type != Material.AIR) return@forEach
             spawnableFaceCount++
         }
-
-        // デバッグ用
-        println("Spawnable Face Count is: $spawnableFaceCount")
         return spawnableFaceCount >= 1
     }
 
