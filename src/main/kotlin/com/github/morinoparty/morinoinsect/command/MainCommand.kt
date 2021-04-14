@@ -62,7 +62,7 @@ class MainCommand(
      */
     @Subcommand("randompickup")
     @CommandPermission("moripa.debug")
-    @CommandCompletion("@blocks @spawnType x y z")
+    @CommandCompletion("@blocks @spawnTypes @playerLocX @playerLocY @playerLocZ")
     fun randomPickUp(sender: CommandSender, blockName: String, spawnTypeName: String, args: Array<String>) {
         if (sender !is Player) return
 
@@ -70,9 +70,7 @@ class MainCommand(
             ?: return sender.sendMessage("そのアイテムは存在しません")
         if (!block.isBlock) return sender.sendMessage("それはブロックではありません")
 
-        val spawnType = SpawnDirection.valueOf(spawnTypeName)
-
-        // 本当はちゃんとブロックを指定しなければならないがデバッグ用なので適当な座標のブロックを取得している
+        val spawnType = SpawnDirection.valueOf(spawnTypeName.toUpperCase())
         val debugLocation = Location(sender.world, args[0].toDouble(), args[1].toDouble(), args[2].toDouble())
         val debugBlock: Block = debugLocation.block
 
