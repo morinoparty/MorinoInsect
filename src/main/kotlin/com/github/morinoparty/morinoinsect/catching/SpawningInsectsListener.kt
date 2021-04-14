@@ -55,10 +55,11 @@ class SpawningInsectsListener(
             return
         }
         val insectItem = plugin.converter.createItemStack(catcher, insect)
+        val spawnLocation = spawnBlock.location.adjustSpawnLocation(spawnDirection.direction)
         val insectItemFrame = catcher.world.spawn(
-            spawnBlock.location.adjustSpawnLocation(spawnDirection.direction),
+            spawnLocation,
             ItemFrame::class.java
-        ).also {
+        ) {
             it.setItem(insectItem)
             it.setFacingDirection(spawnDirection.direction, false)
             it.isVisible = false
