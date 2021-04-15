@@ -36,6 +36,7 @@ class SpawningInsectsListener(
             event.action == Action.RIGHT_CLICK_BLOCK || event.action == Action.RIGHT_CLICK_AIR
         if (!playerHasInsectCatchingNet) return
         if (!playerRightClicked) return
+        if (!player.isSneaking) return
         val spawnBlock = detectBlocksAroundPlayer(player).random()
         val spawnType = SpawnDirection.values().random()
         spawnInsect(player, spawnBlock, spawnType)
@@ -63,6 +64,7 @@ class SpawningInsectsListener(
             it.setItem(insectItem)
             it.setFacingDirection(spawnDirection.direction, false)
             it.isVisible = false
+            it.isFixed = true
         }
 
         // デバッグ用
