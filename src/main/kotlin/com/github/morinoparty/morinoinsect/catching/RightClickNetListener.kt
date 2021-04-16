@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
 /** 虫のスポーン処理をするイベントクラス */
-class SpawningInsectsListener(
+class RightClickNetListener(
     private val plugin: MorinoInsect,
     private val catchingNet: ItemStack
 ) : Listener, SpawnLocationAdjuster {
@@ -28,7 +28,7 @@ class SpawningInsectsListener(
      * @param event プレイヤーがエンティティやブロックをクリックしたのを感知するイベント
      */
     @EventHandler
-    fun onSpawn(event: PlayerInteractEvent) {
+    fun onPlayerInteract(event: PlayerInteractEvent) {
         val player = event.player
         val playerHasInsectCatchingNet =
             player.inventory.itemInMainHand == catchingNet

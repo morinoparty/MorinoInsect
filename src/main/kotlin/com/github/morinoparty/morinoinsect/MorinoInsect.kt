@@ -3,7 +3,7 @@ package com.github.morinoparty.morinoinsect
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import br.com.devsrsouza.kotlinbukkitapi.extensions.plugin.registerEvents
 import co.aikar.commands.PaperCommandManager
-import com.github.morinoparty.morinoinsect.catching.SpawningInsectsListener
+import com.github.morinoparty.morinoinsect.catching.RightClickNetListener
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import com.github.morinoparty.morinoinsect.command.MainCommand
@@ -23,7 +23,7 @@ class MorinoInsect : KotlinPlugin() {
     override fun onPluginEnable() {
 
         server.pluginManager.apply {
-            val spawningInsectsListener = SpawningInsectsListener(this@MorinoInsect, insectCatchingNet)
+            val spawningInsectsListener = RightClickNetListener(this@MorinoInsect, insectCatchingNet)
             registerEvents(spawningInsectsListener)
         }
 
