@@ -25,7 +25,6 @@ class SpawnDirectionCondition(
             SpawnDirection.NORTH -> spawnBlock.getRelative(spawnDirection.direction, 1).type == Material.AIR
             SpawnDirection.UP -> spawnBlock.getRelative(spawnDirection.direction, 1).type == Material.AIR
             SpawnDirection.DOWN -> spawnBlock.getRelative(spawnDirection.direction, 1).type == Material.AIR
-            else -> throw IllegalStateException("予期しないエラーが起きました")
         }
     }
 }
