@@ -24,6 +24,7 @@ class MainCommand(
     private val converter: InsectItemStackConverter,
     private val catchingNet: ItemStack
 ) : BaseCommand() {
+
     private val pluginName = "MorinoInsect"
 
     @Default

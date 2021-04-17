@@ -14,6 +14,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class MorinoInsect : KotlinPlugin() {
+
     init { Config.load(this) }
 
     val insectCatchingNet = ItemStack(Config.insectConfig.insectCatchingNet.createInsectNet())
