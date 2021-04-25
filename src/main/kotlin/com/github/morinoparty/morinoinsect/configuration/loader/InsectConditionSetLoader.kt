@@ -2,10 +2,10 @@ package com.github.morinoparty.morinoinsect.configuration.loader
 
 import com.github.morinoparty.morinoinsect.catching.condition.BiomeCondition
 import com.github.morinoparty.morinoinsect.catching.condition.BlockCondition
+import com.github.morinoparty.morinoinsect.catching.condition.DirectionCondition
 import com.github.morinoparty.morinoinsect.catching.condition.InsectCondition
 import com.github.morinoparty.morinoinsect.catching.condition.LocationYCondition
 import com.github.morinoparty.morinoinsect.catching.condition.RainingCondition
-import com.github.morinoparty.morinoinsect.catching.condition.DirectionCondition
 import com.github.morinoparty.morinoinsect.catching.condition.ThunderingCondition
 import com.github.morinoparty.morinoinsect.catching.condition.TimeCondition
 import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
