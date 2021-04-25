@@ -1,4 +1,23 @@
 #この設定ファイルは未完成のサンプルです
 
-testMessage: "&6きんたまきらきらきんようび"
-sampleMessage: "[もりのパーティ！公式ホームページ](**&#008080&クリックして開く** color=#ff00ff open_url=https://morino.party)"
+# %player% - 虫取り少年の名前
+# %length% - 虫のサイズ
+# %rarity% - 虫のレアリティ
+# %rarity_color% - レアリティの色
+# %insect% - 虫の名前
+# %insect_with_rarity% - テキストのフォーマット "[レアリティ] [魚の名前]" (色付き)
+spawnInsect: "<#66bb6a>[むしとり] <green>耳を済ませていたら、虫の声が聞こえてきた..."
+notSpawnInsect: "<#66bb6a>[むしとり] <green>この辺りに虫はいないようだ..."
+catchInsect: "<#66bb6a>[むしとり] <#ffab91><player> <r>は <length>cm <b><rarity_color><insect_with_rarity> <r>をつかまえた！"
+failureInsect: "<#66bb6a>[むしとり] <red>虫が逃げちゃった！"
+
+limitOver: "<#66bb6a>[むしとり] <red>虫を設置できる数は1チャンクに8匹までだよ"
+catchCoolDown: "<#66bb6a>[むしとり] <red>クールダウン中です"
+
+# %time% - コンテストの残り時間 (例 1m 23s)
+# contestStart:
+# contestStartTimer:
+# contestStop:
+# timerBossBar: "&b[MoreFish]&r &b&l釣りコンテスト &r[%time% left]"
+# timeFormatMinutes: "分"
+# timeFormatSeconds: "秒"

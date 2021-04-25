@@ -1,5 +1,6 @@
 package com.github.morinoparty.morinoinsect.catching.condition
 
+import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import org.bukkit.Material
 import org.bukkit.entity.Player
 
@@ -9,17 +10,18 @@ import org.bukkit.entity.Player
  *
  * @author うにたろう
  */
-interface Condition {
+interface InsectCondition {
     /**
      * 必要なプロパティを受け取りコンディションチェックを行います
      *
      * @param catcher 虫を捕まえるプレイヤー
-     * @param block スポーンさせるブロック
+     * @param material スポーンさせるブロック
+     * @param spawnDirection 虫のスポーンする向き
      * @return チェックに合格すればtrueを返します
      */
     fun check(
         catcher: Player,
-        block: Material,
-        // TODO: directionチェックのためにもう一つプロパティが必要
+        material: Material,
+        spawnDirection: SpawnDirection
     ): Boolean
 }
