@@ -9,7 +9,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "6.0.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
 }
-
 group = "com.github.morinoparty"
 version = "1.0-SNAPSHOT"
 
@@ -20,11 +19,12 @@ repositories {
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
 
     // kotlinbukkitapi with backup repo
-    maven("http://nexus.devsrsouza.com.br/repository/maven-public/")
+    maven("http://nexus.devsrsouza.com.br/repository/maven-public/").isAllowInsecureProtocol = true
 
     // plugins
     maven("https://jitpack.io")
-    maven("http://repo.dmulloy2.net/nexus/repository/public/")
+    maven("http://repo.dmulloy2.net/nexus/repository/public/").isAllowInsecureProtocol = true
+    maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
 
     // Utils
     maven("https://repo.aikar.co/content/groups/aikar/")
@@ -45,15 +45,18 @@ dependencies {
     // plugins
     val transitive = Action<ExternalModuleDependency> { isTransitive = false }
     compileOnly("com.github.MilkBowl:VaultAPI:1.7", transitive)
+    compileOnly("me.clip:placeholderapi:2.10.9", transitive)
 
     // Utils
     implementation("co.aikar:acf-paper:0.5.0-SNAPSHOT")
     implementation("de.themoep:minedown-adventure:1.7.0-SNAPSHOT")
+    implementation("net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT")
 }
 
 bukkit {
     main = "com.github.morinoparty.morinoinsect.MorinoInsect"
-    depend = listOf("KotlinBukkitAPI", "Vault")
+    depend = listOf("KotlinBukkitAPI")
+    softDepend = listOf("PlaceholderAPI", "Vault")
     description = "Minecraft でゴージャスな虫取りを実装するプラグインです。"
     author = "morinoparty"
     website = "https://github.com/morinoparty/MorinoInsect"

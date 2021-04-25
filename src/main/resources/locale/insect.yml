@@ -2,227 +2,183 @@
 
 # 説明文
 itemFormat:
-  description:
-    - "&7とった: &b%player%"
-    - "&7さいず: &f%length% mm"
-    - "&7ひづけ: &f%localtime_timezone_Asia/Tokyo,yyyy/MM/dd%"
+  lore:
+    - "<gray>とった: <#4db6ac><player>"
+    - "<gray>さいず: <white><length> mm"
+    - "<gray>ひづけ: <white>%localtime_timezone_Asia/Tokyo,yyyy/MM/dd%"
 
 # 虫取りあみ
-insectCatchingNet:
-  name: "虫取り網"
+insectNet:
+  displayName: "虫取り網"
   id: "bowl"
   customModelData: 1
-  description:
-    - "&r&f虫取り網！"
-    - "&r&fおいしい虫を捕まえるの！"
+  lore:
+    - "<#f48fb1>虫取り網！"
+    - "<#f48fb1>おいしい虫を捕まえるの！"
 
 # レア度一覧
-rarityMap:
+rarityList:
   junk:
-    name: "ゴミ"
+    displayName: "ゴミ"
     color: "#616161"
     chance: 1.0
-    catchAnnounce: -1
+    catchAnnounce: 0
   common:
-    name: "コモン"
-    color: "#fffff"
+    displayName: "コモン"
+    color: "white"
     chance: 70.0
-    catchAnnounce: -1
+    catchAnnounce: 0
   uncommon:
-    name: "アンコモン"
+    displayName: "アンコモン"
     color: "#80deea"
     chance: 22.0
-    catchAnnounce: 1
+    catchAnnounce: -1
   rare:
-    name: "レア"
+    displayName: "レア"
     color: "#ffd54f"
-    chance: 6.5
-    catchAnnounce: 1
+    chance: 5.0
+    catchAnnounce: -1
+    firework: 1
   mythicrare:
-    name: "神話レア"
+    displayName: "神話レア"
     color: "#e64a19"
     chance: 0.5
-    catchAnnounce: 1
+    catchAnnounce: -1
+    firework: 3
 
 # 虫一覧
-insectMap:
+insectList:
   darner_dragonfly:
     rarity: "common"
-    name: "ギンヤンマ"
     lengthMin: 70
     lengthMax: 80
     conditions:
       blocks:
         - "grass_block"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "up"
     icon:
+      displayName: "ギンヤンマ"
       id: "bowl"
       customModelData: 11
-      comment:
+      lore:
         - "ギンヤンマ！"
         - "おいしい！"
   red_dragonfly:
     rarity: "common"
-    name: "アキアカネ"
     lengthMin: 32
     lengthMax: 46
     conditions:
       blocks:
         - "grass_block"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "up"
     icon:
+      displayName: "アキアカネ"
       id: "bowl"
       customModelData: 12
-      comment:
+      lore:
         - "アキアカネ！"
         - "おいしい！"
   yellow_butterfly:
     rarity: "common"
-    name: "モンキチョウ"
     lengthMin: 22
     lengthMax: 33
     conditions:
       blocks:
         - "grass_block"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "up"
     icon:
+      displayName: "モンキチョウ"
       id: "bowl"
       customModelData: 13
-      comment:
+      lore:
         - "モンキチョウ！"
         - "おいしい！"
   giant_stag:
     rarity: "uncommon"
-    name: "オオクワガタ"
     lengthMin: 20
     lengthMax: 90
     conditions:
       blocks:
         - "oak_log"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "north"
+        - "east"
+        - "south"
+        - "west"
     icon:
+      displayName: "オオクワガタ"
       id: "bowl"
       customModelData: 14
-      comment:
+      lore:
         - "オオクワガタ！"
         - "おいしい！"
   banded_dragonfly:
     rarity: "rare"
-    name: "オニヤンマ"
     lengthMin: 90
     lengthMax: 110
     conditions:
       blocks:
         - "grass_block"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "up"
     icon:
+      displayName: "オニヤンマ"
       id: "bowl"
       customModelData: 15
-      comment:
+      lore:
         - "オニヤンマ！"
         - "おいしい！"
   horned_dynastid:
     rarity: "common"
-    name: "カブトムシ"
     lengthMin: 25
     lengthMax: 91
     conditions:
       blocks:
         - "oak_log"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "north"
+        - "east"
+        - "south"
+        - "west"
     icon:
+      displayName: "カブトムシ"
       id: "bowl"
       customModelData: 16
-      comment:
+      lore:
         - "カブトムシ！"
         - "おいしい！"
   common_butterfly:
     rarity: "common"
-    name: "モンシロチョウ"
     lengthMin: 32
     lengthMax: 47
     conditions:
       blocks:
         - "grass_block"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "up"
     icon:
+      displayName: "モンシロチョウ"
       id: "bowl"
       customModelData: 17
-      comment:
+      lore:
         - "モンシロチョウ！"
         - "おいしい！"
   mantis:
     rarity: "uncommon"
-    name: "オオカマキリ"
     lengthMin: 68
     lengthMax: 95
     conditions:
       blocks:
         - "grass_block"
-      spawnTypes:
-        - "UP"
+      directions:
+        - "up"
     icon:
+      displayName: "オオカマキリ"
       id: "bowl"
       customModelData: 18
-      comment:
+      lore:
         - "オオカマキリ！"
         - "おいしい！"
-
-# 古い
-#  Beetle:
-#    rarity: "common"
-#    name: "カブトムシ"
-#    lengthMin: 30
-#    lengthMax: 90
-#    conditions:
-#      blocks:
-#        - "sand"
-#        - "stone"
-#      spawnTypes:
-#        - "UP"
-#      time: "night"
-#    icon:
-#      id: "paper"
-#      customModelData: 13
-#      skullTexture: null
-#      comment:
-#        - "カブトムシ！"
-#        - "おいしい！"
-#  Hornworm:
-#    rarity: "rare"
-#    name: "いもむし"
-#    lengthMin: 10
-#    lengthMax: 20
-#    conditions:
-#      blocks:
-#        - "stone"
-#      spawnTypes:
-#        - "UP"
-#    icon:
-#      id: "stone_sword"
-#      customModelData: 2
-#      enchantments:
-#        - "mending|1"
-#  Kuwagata:
-#    rarity: "rare"
-#    name: "クワガタムシ"
-#    lengthMin: 30
-#    lengthMax: 500
-#    conditions:
-#      blocks:
-#        - "stone"
-#      spawnTypes:
-#        - "UP"
-#    icon:
-#      id: "cookie"
-#      customModelData: 22
-#      enchantments:
-#        - "silk_touch|1"
-#        - "respiration|2"

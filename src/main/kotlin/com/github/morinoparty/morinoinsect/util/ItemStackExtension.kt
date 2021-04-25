@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.item
+package com.github.morinoparty.morinoinsect.util
 
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
