@@ -49,7 +49,9 @@ class NetRightClickListener(
             val nearbyInsectFrames = event.player.location.getNearbyEntitiesByType(ItemFrame::class.java, RADIUS)
                 .filter {
                     insectFrameConverter.isInsectFrame(it) &&
-                        insectFrameConverter.loadTag(it) == SPAWN
+                        insectFrameConverter.loadTag(it) == SPAWN &&
+                        insectItemConverter.isInsect(it.item) &&
+                        insectItemConverter.insect(it.item).catcher == player
                 }
             if (nearbyInsectFrames.isNotEmpty()) {
                 return player.sendMessage(Config.messageConfig.spawnNowInsect.miniMessage())
