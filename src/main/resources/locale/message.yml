@@ -13,6 +13,7 @@ failureInsect: "<#66bb6a>[むしとり] <red>虫が逃げちゃった！"
 
 limitOver: "<#66bb6a>[むしとり] <red>虫を設置できる数は1チャンクに8匹までだよ"
 catchCoolDown: "<#66bb6a>[むしとり] <red>クールダウン中です"
+spawnNowInsect: "<#66bb6a>[むしとり] <red>すでに虫が発生しているよ！！"
 
 # %time% - コンテストの残り時間 (例 1m 23s)
 # contestStart:

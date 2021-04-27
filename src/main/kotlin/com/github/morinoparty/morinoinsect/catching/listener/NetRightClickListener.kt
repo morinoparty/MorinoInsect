@@ -11,6 +11,7 @@ import com.okkero.skedule.BukkitDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.bukkit.entity.ItemFrame
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -44,40 +45,62 @@ class NetRightClickListener(
             !player.isSprinting &&
             netItemConverter.isInsectNet(player.inventory.itemInMainHand)
         ) {
+            // スポーンした虫が近くにいる場合はリターン
+            val nearbyInsectFrames = event.player.location.getNearbyEntitiesByType(ItemFrame::class.java, RADIUS)
+                .filter {
+                    insectFrameConverter.isInsectFrame(it) &&
+                        insectFrameConverter.loadTag(it) == SPAWN
+                }
+            if (nearbyInsectFrames.isNotEmpty()) {
+                return player.sendMessage(Config.messageConfig.spawnNowInsect.miniMessage())
+            }
+
+            // クールダウン中ならリターン
             if (coolDownPlayers.contains(player.uniqueId)) {
                 return player.sendMessage(Config.messageConfig.catchCoolDown.miniMessage())
             }
 
-            coolDown(player.uniqueId)
-
+            // スポーンするブロックがなければリターン
             val spawnBlock = spawnBlockConverter.pickRandomBlock(player.location.block)
-                ?: return player.sendMessage(Config.messageConfig.notSpawnInsect.miniMessage())
+            if (spawnBlock == null) {
+                player.sendMessage(Config.messageConfig.notSpawnInsect.miniMessage())
+                coolDown(player.uniqueId, Config.standardConfig.general.notSpawnCoolDown)
+                return
+            }
 
+            // 発生できる虫がいなかったらリターン
             val insect = insectTypeTable.pickRandomType(
                 catcher = player,
                 material = spawnBlock.first.type,
                 spawnDirection = spawnBlock.second
             )?.generateInsect(player)
-                ?: return player.sendMessage(Config.messageConfig.notSpawnInsect.miniMessage())
-            val insectItem = insectItemConverter.createItemStack(insect)
+            if (insect == null) {
+                player.sendMessage(Config.messageConfig.notSpawnInsect.miniMessage())
+                coolDown(player.uniqueId, Config.standardConfig.general.notSpawnCoolDown)
+                return
+            }
 
+            val insectItem = insectItemConverter.createItemStack(insect)
             try {
                 insectFrameConverter.spawn(spawnBlock.first, insectItem, spawnBlock.second.face)
+                coolDown(player.uniqueId, Config.standardConfig.general.spawnCoolDown)
             } catch (error: IllegalArgumentException) {
                 return player.sendMessage(Config.messageConfig.notSpawnInsect.miniMessage())
             }
         }
     }
 
-    private fun coolDown(uuid: UUID) {
+    private fun coolDown(uuid: UUID, time: Long) {
         GlobalScope.launch(BukkitDispatcher(plugin as JavaPlugin)) {
             coolDownPlayers.add(uuid)
-            delay(ONE_SECOND * Config.standardConfig.general.catchCoolDown)
+            delay(ONE_SECOND * time)
             coolDownPlayers.remove(uuid)
         }
     }
 
     companion object {
         private const val ONE_SECOND = 1000L
+        private const val RADIUS = 16.0
+        private const val SPAWN: Byte = 1
     }
 }

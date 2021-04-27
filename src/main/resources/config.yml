@@ -1,5 +1,6 @@
 # この設定ファイルは未完成のサンプルです
 
 general:
-  catchCoolDown: 30  # 虫あみを使ってからサイド使えるまでの時間(秒)
+  spawnCoolDown: 15 # スポーンした場合のクールタイム(秒)
+  notSpawnCoolDown: 5 # スポーンしなかった場合のクールタイム(秒)
   failureTime: 30 # 虫がスポーンしてから逃げるまでの時間(秒)
