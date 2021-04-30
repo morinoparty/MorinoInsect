@@ -1,7 +1,7 @@
 package com.github.morinoparty.morinoinsect.catching.converter
 
 import br.com.devsrsouza.kotlinbukkitapi.extensions.server.worlds
-import com.github.morinoparty.morinoinsect.item.InsectFrameTagManager
+import com.github.morinoparty.morinoinsect.catching.tag.InsectFrameTagManager
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.NamespacedKey

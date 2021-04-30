@@ -11,7 +11,8 @@ data class StandardConfig(
 ) {
     @Serializable
     data class General(
-        val catchCoolDown: Long = 30,
+        val spawnCoolDown: Long = 15,
+        val notSpawnCoolDown: Long = 5,
         val failureTime: Long = 30
     )
 }

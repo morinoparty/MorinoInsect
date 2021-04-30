@@ -11,9 +11,10 @@ import kotlinx.serialization.Serializable
 data class MessageConfig(
     val spawnInsect: String = "",
     val notSpawnInsect: String = "",
-    val catchInsect: String = "",
     val failureInsect: String = "",
+    val catchInsect: String = "",
 
     val limitOver: String = "",
-    val catchCoolDown: String = ""
+    val catchCoolDown: String = "",
+    val spawnNowInsect: String = ""
 )

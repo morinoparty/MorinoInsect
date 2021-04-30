@@ -1,4 +1,4 @@
-package com.github.morinoparty.morinoinsect.item
+package com.github.morinoparty.morinoinsect.catching.tag
 
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Entity
