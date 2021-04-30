@@ -14,16 +14,8 @@ general:
 contestPrizes:
   1:
     - "mpdb ecoadd <player> 1000"
-  2:
-    - "mpdb ecoadd <player> 500"
-  3:
-    - "mpdb ecoadd <player> 300"
-  4:
-    - "mpdb ecoadd <player> 100"
-  5:
-    - "mpdb ecoadd <player> 50"
-  6~:
-    - "mpdb ecoadd <player> 5"
+  2~:
+    - "mpdb ecoadd <player> 1"
 
 autoRunning:
   enable: false
