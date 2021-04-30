@@ -2,6 +2,7 @@ package com.github.morinoparty.morinoinsect.configuration
 
 import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import br.com.devsrsouza.kotlinbukkitapi.serialization.architecture.config
+import com.github.morinoparty.morinoinsect.announcement.BaseAnnouncement
 import com.github.morinoparty.morinoinsect.configuration.loader.CustomItemStackLoader
 import com.github.morinoparty.morinoinsect.configuration.loader.EnchantmentMapLoader
 import com.github.morinoparty.morinoinsect.configuration.loader.InsectConditionSetLoader
@@ -9,6 +10,7 @@ import com.github.morinoparty.morinoinsect.configuration.loader.InsectRaritySetL
 import com.github.morinoparty.morinoinsect.configuration.loader.InsectSpawnerSetLoader
 import com.github.morinoparty.morinoinsect.configuration.loader.InsectTypeMapLoader
 import com.github.morinoparty.morinoinsect.configuration.loader.PlayerAnnouncementLoader
+import com.github.morinoparty.morinoinsect.configuration.loader.PrizeMapLoader
 import com.github.morinoparty.morinoinsect.configuration.loader.TextColorLoader
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -24,9 +26,13 @@ object Config {
     val playerAnnouncementLoader = PlayerAnnouncementLoader()
     val insectRaritySetLoader = InsectRaritySetLoader(textColorLoader, playerAnnouncementLoader)
     val insectConditionSetLoader = InsectConditionSetLoader()
+    val prizeMapLoader: PrizeMapLoader = PrizeMapLoader()
 
     val insectTypeMapLoader = InsectTypeMapLoader(insectRaritySetLoader, customItemStackLoader, insectConditionSetLoader)
     val insectSpawnerSetLoader = InsectSpawnerSetLoader()
+
+    val newFirstAnnouncement: BaseAnnouncement
+        get() = playerAnnouncementLoader.loadFrom(standardConfig.messages.announceNew1st)
 
     fun load(plugin: KotlinPlugin) {
         val configPath = Paths.get("config.yml")

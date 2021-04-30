@@ -1,6 +1,47 @@
 # この設定ファイルは未完成のサンプルです
 
 general:
+  autoStart: false
+  useBossBar: true
+  onlyForContest: false
+  noCatchingUnlessContest: false
+  contestDisabledWorlds: [ ]
+  saveRecords: false
   spawnCoolDown: 15 # スポーンした場合のクールタイム(秒)
   notSpawnCoolDown: 5 # スポーンしなかった場合のクールタイム(秒)
   failureTime: 30 # 虫がスポーンしてから逃げるまでの時間(秒)
+
+contestPrizes:
+  1:
+    - "mpdb ecoadd <player> 1000"
+  2:
+    - "mpdb ecoadd <player> 500"
+  3:
+    - "mpdb ecoadd <player> 300"
+  4:
+    - "mpdb ecoadd <player> 100"
+  5:
+    - "mpdb ecoadd <player> 50"
+  6~:
+    - "mpdb ecoadd <player> 5"
+
+autoRunning:
+  enable: false
+  requiredPlayers: 5
+  timer: 300
+  # HH:mm (H: 0-23, m: 0-59)
+  startTime:
+    - "09:00"
+    - "11:30"
+    - "14:00"
+    - "18:00"
+    - "21:00"
+
+messages:
+  announceNew1st: -1
+  onlyAnnounceCatchingNet: false
+  broadcastStart: true
+  broadcastStop: true
+  showTopOnEnding: true
+  contestBarColor: "green"
+  topNumber: 3

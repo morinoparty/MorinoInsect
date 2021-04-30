@@ -8,17 +8,23 @@
 # %insect_with_rarity% - テキストのフォーマット "[レアリティ] [魚の名前]" (色付き)
 spawnInsect: "<#66bb6a>[むしとり] <green>耳を済ませていたら、虫の声が聞こえてきた..."
 notSpawnInsect: "<#66bb6a>[むしとり] <green>この辺りに虫はいないようだ..."
-catchInsect: "<#66bb6a>[むしとり] <#ffab91><player> <r>は <length>cm <b><rarity_color><insect_with_rarity> <r>をつかまえた！"
+catchInsect: "<#66bb6a>[むしとり] <#ffab91><player> <r>は <length>mm <b><rarity_color><insect_with_rarity> <r>をつかまえた！"
 failureInsect: "<#66bb6a>[むしとり] <red>虫が逃げちゃった！"
+get1st: "<aqua>[MoreFish]<r> <yellow><player><r> は今 1位です!"
 
 limitOver: "<#66bb6a>[むしとり] <red>虫を設置できる数は1チャンクに8匹までだよ"
 catchCoolDown: "<#66bb6a>[むしとり] <red>クールダウン中です"
 spawnNowInsect: "<#66bb6a>[むしとり] <red>すでに虫が発生しているよ！！"
 
 # %time% - コンテストの残り時間 (例 1m 23s)
-# contestStart:
-# contestStartTimer:
-# contestStop:
-# timerBossBar: "&b[MoreFish]&r &b&l釣りコンテスト &r[%time% left]"
-# timeFormatMinutes: "分"
-# timeFormatSeconds: "秒"
+contestStart: "<#66bb6a>[むしとり] <r>虫取り大会スタートです！"
+contestStartTimer: "<#66bb6a>[むしとり] <r>虫取り大会の制限時間は <time> です！"
+contestStop: "<#66bb6a>[むしとり] <r>虫取り大会終了です！"
+timerBossBar: "<#66bb6a>[むしとり] <aqua><b>虫取り大会 <r>[残り時間 <time>]"
+timeFormatMinutes: "分"
+timeFormatSeconds: "秒"
+
+topList: "<#66bb6a>[むしとり]<r> <yellow><ordinal>. <gray>: <player>, <length>mm <insect>"
+topNoRecord: "<#66bb6a>[むしとり]<r> 誰もまだ記録を持っていません"
+topMine: "<#66bb6a>[むしとり]<r> あなたは <ordinal>: <length>mm <insect>"
+topMineNoRecord: "<#66bb6a>[むしとり]<r> あなたは賞を獲得していません"

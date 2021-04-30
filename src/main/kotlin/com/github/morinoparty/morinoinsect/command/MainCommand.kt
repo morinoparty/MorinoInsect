@@ -8,13 +8,16 @@ import co.aikar.commands.annotation.Default
 import co.aikar.commands.annotation.Subcommand
 import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import com.github.morinoparty.morinoinsect.MorinoInsect
+import com.github.morinoparty.morinoinsect.catching.competition.CatchingCompetitionHost
 import com.github.morinoparty.morinoinsect.catching.converter.InsectItemStackConverter
 import com.github.morinoparty.morinoinsect.catching.converter.NetItemStackConverter
 import com.github.morinoparty.morinoinsect.catching.insect.Insect
 import com.github.morinoparty.morinoinsect.catching.insect.InsectTypeTable
 import com.github.morinoparty.morinoinsect.catching.insect.SpawnDirection
 import com.github.morinoparty.morinoinsect.configuration.Config
+import com.github.morinoparty.morinoinsect.util.TimerUtils
 import com.github.morinoparty.morinoinsect.util.miniMessage
+import net.kyori.adventure.text.minimessage.Template
 import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.block.Block
@@ -26,10 +29,12 @@ class MainCommand(
     private val morinoInsect: MorinoInsect,
     private val insectTypeTable: InsectTypeTable,
     private val insectConverter: InsectItemStackConverter,
-    private val netConverter: NetItemStackConverter
+    private val netConverter: NetItemStackConverter,
+    private val competitionHost: CatchingCompetitionHost
 ) : BaseCommand() {
-
     private val pluginName = "MorinoInsect"
+    private val competition = competitionHost.competition
+
     @Default
     @Subcommand("help")
     @CommandPermission("moripa.help")
@@ -48,6 +53,58 @@ class MainCommand(
             sender.sendMessage("リロード失敗")
         }
     }
+
+    @Subcommand("begin|start")
+    @CommandPermission("moripa.mod")
+    fun begin(sender: CommandSender, runningTime: Long) {
+        if (!competition.isEnabled()) {
+            competitionHost.openCompetitionFor(runningTime * 20)
+
+            if (!Config.standardConfig.messages.broadcastStart) {
+                val msg = Config.messageConfig.contestStartTimer.miniMessage(listOf(Template.of("time", TimerUtils.time(runningTime))))
+                sender.sendMessage(msg)
+            }
+        } else {
+            sender.sendMessage("開催できん")
+        }
+    }
+
+    @Subcommand("suspend")
+    @CommandPermission("moripa.mod")
+    fun suspend(sender: CommandSender) {
+        if (!competition.isDisabled()) {
+            competitionHost.closeCompetition(suspend = true)
+
+            if (!Config.standardConfig.messages.broadcastStop) {
+                sender.sendMessage(Config.messageConfig.contestStop)
+            }
+        } else {
+            sender.sendMessage("一時停止")
+        }
+    }
+
+    @Subcommand("end")
+    @CommandPermission("moripa.mod")
+    fun end(sender: CommandSender) {
+        if (!competition.isDisabled()) {
+            competitionHost.closeCompetition()
+
+            if (!Config.standardConfig.messages.broadcastStop) {
+                sender.sendMessage(Config.messageConfig.contestStop)
+            }
+        } else {
+            sender.sendMessage("already-stopped")
+        }
+    }
+
+    @Subcommand("top|ranking")
+    @CommandPermission("default")
+    fun top(sender: CommandSender) {
+        competitionHost.informAboutRanking(sender)
+    }
+
+    // デバッグ用コマンド群
+    // だおｇｈなｒｇばぽｇばいｗｂｇ
 
     @Subcommand("net")
     @CommandPermission("moripa.mod")
