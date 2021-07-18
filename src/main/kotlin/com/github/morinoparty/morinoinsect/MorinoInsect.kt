@@ -4,6 +4,10 @@ import br.com.devsrsouza.kotlinbukkitapi.architecture.KotlinPlugin
 import co.aikar.commands.PaperCommandManager
 import com.github.morinoparty.morinoinsect.catching.catchhandler.CatchBroadcaster
 import com.github.morinoparty.morinoinsect.catching.catchhandler.CatchHandler
+import com.github.morinoparty.morinoinsect.catching.catchhandler.CompetitionRecordAdder
+import com.github.morinoparty.morinoinsect.catching.catchhandler.NewFirstBroadcaster
+import com.github.morinoparty.morinoinsect.catching.competition.CatchingCompetition
+import com.github.morinoparty.morinoinsect.catching.competition.CatchingCompetitionHost
 import com.github.morinoparty.morinoinsect.catching.converter.InsectItemFrameConverter
 import com.github.morinoparty.morinoinsect.catching.converter.InsectItemStackConverter
 import com.github.morinoparty.morinoinsect.catching.converter.NetItemStackConverter
@@ -17,6 +21,7 @@ import com.github.morinoparty.morinoinsect.catching.listener.PlaceInsectListener
 import com.github.morinoparty.morinoinsect.catching.listener.SearchingWatcher
 import com.github.morinoparty.morinoinsect.command.MainCommand
 import com.github.morinoparty.morinoinsect.configuration.Config
+import com.github.morinoparty.morinoinsect.dao.DaoFactory
 import com.github.morinoparty.morinoinsect.hooker.PlaceholderApiHooker
 import com.github.morinoparty.morinoinsect.hooker.VaultHooker
 import org.bukkit.Bukkit
@@ -30,16 +35,21 @@ class MorinoInsect : KotlinPlugin() {
     val insectTypeTable = MutableInsectTypeTable()
     val spawnBlockTable = mutableSetOf<Material>()
 
+    val competition = CatchingCompetition()
+    val competitionHost = CatchingCompetitionHost(this, competition)
+
     val netConverter = NetItemStackConverter(this)
     val insectConverter = InsectItemStackConverter(this, insectTypeTable)
     val frameConverter = InsectItemFrameConverter(this)
     val spawnBlockConverter = SpawnBlockConverter(spawnBlockTable)
     val globalCatchHandlers: List<CatchHandler> = listOf(
-        CatchBroadcaster()
-        // TODO: 他のも実装
+        CatchBroadcaster(),
+        NewFirstBroadcaster(competition),
+        CompetitionRecordAdder(competition)
     )
 
     override fun onPluginEnable() {
+        DaoFactory.init(this)
 
         vault.hookIfEnabled(this)
         placeholderApiHooker.hookIfEnabled(this)
@@ -61,7 +71,7 @@ class MorinoInsect : KotlinPlugin() {
 
         val manager = PaperCommandManager(this)
         val completions = manager.commandCompletions
-        val mainCommand = MainCommand(this, insectTypeTable, insectConverter, netConverter)
+        val mainCommand = MainCommand(this, insectTypeTable, insectConverter, netConverter, competitionHost)
         manager.registerCommand(mainCommand)
         completions.registerAsyncCompletion("insects") {
             insectTypeTable.types.map { it.name }

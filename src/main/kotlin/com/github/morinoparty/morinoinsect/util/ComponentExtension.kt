@@ -11,6 +11,8 @@ import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer
  */
 internal fun Component.plainText(): String = PlainComponentSerializer.plain().serialize(this)
 
+internal fun Component.serialize(): String = MiniMessage.get().serialize(this)
+
 /**
  * テキストをAdventureMiniMessageに変換するメソッド
  * https://docs.adventure.kyori.net/minimessage.html

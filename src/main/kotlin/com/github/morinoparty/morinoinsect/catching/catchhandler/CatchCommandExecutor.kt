@@ -8,7 +8,7 @@ class CatchCommandExecutor(
     override fun handle(insect: Insect) {
         val server = insect.catcher.server
         for (command in commands) {
-            server.dispatchCommand(server.consoleSender, command.replace("@p", insect.catcher.name))
+            server.dispatchCommand(server.consoleSender, command.replace("<player>", insect.catcher.name))
         }
     }
 }
